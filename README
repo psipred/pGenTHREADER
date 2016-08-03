@@ -1,0 +1,163 @@
+###############################################################################
+#
+# README created 10/02/2009 
+# 
+# INSTALL and test instructions for pGen/DomTHREADER
+# VERSION 8.9
+# Author: alobley@cs.ucl.ac.uk d.buchan@cs.ucl.ac.uk
+#
+# Change in 8.9
+# - addition of mtx2con
+# - Added predict_contacts.pl to bin/
+# - added svm probability_model to data/
+#
+# Changes in 8.7
+# - fixes the psuedo-multialignment building scripts in BLAST+/
+#
+# Changes in 8.6
+# - consolidation of BLAST+scripts
+# - new genthreader.sh script for both domthreader and genthreader for BLAST+
+#
+# Changes in 8.5
+# - Some minor bug fixes to the BLAST+ methods
+# - Added the ability to switch off psiblast in the MSA methods when seeded
+#   with the complete set of homologues
+#
+# Changes in 8.4
+# - Several bug fixes for the MSA methods
+#
+# Changes in 8.3
+# - Addition of MSA and BLAST+ methods
+#
+###############################################################################
+
+Follow the steps:
+
+
+#-----------------------------------------------------------------------------#
+#
+# Untar and install the fold libraries
+#
+#-----------------------------------------------------------------------------#
+1. cd into tdb directory
+	prompt> cd tdb
+
+
+2. unpack the fold libraries
+	prompt/tdb> tar -xvzf cath_tdb.tgz fold_lib.tar.gz
+
+NOTE: At present there is no software available to create fold libraries, but
+up to date libraries can be downloaded from our site. Support for user-created 
+fold libraries will be added in a future release.
+
+#------------------------------------------------------------------------------
+#
+# Build the binaries for your system
+#
+#------------------------------------------------------------------------------
+
+3. cd into the src directory
+
+
+4. run the makefile
+	prompt/src> make
+
+5. install the compiled binary
+	prompt/src> make install
+
+#------------------------------------------------------------------------------
+# 
+# Configure the shell script for your system
+#
+#
+#------------------------------------------------------------------------------
+
+6. cd back to the top level directory
+
+7. open the shell script pGenThreader.sh in an editor
+
+8. change the paths at the top to suit your install
+
+9. install PSIPRED and NCBI BLAST if you haven't already (these are
+   NOT included in this package).
+
+#------------------------------------------------------------------------------
+#
+#  Run the test jobs
+#
+#
+#------------------------------------------------------------------------------
+
+9. prompt> sh pGenThreader.sh pgen_test test/test.fsa
+
+10.prompt> sh pDomThreader.sh pdom_test test/test.fsa
+
+
+#------------------------------------------------------------------------------
+#
+# Example outputs
+#
+#
+#------------------------------------------------------------------------------
+
+11. Compare your ouputs with the examples found within the test directory :
+       test/pGT.output and test/pDT.output
+
+#------------------------------------------------------------------------------
+#
+# Trouble shooting
+#
+#
+#------------------------------------------------------------------------------
+
+1. Check with your system administrator that you have installed the binaries 
+   correctly and that you have configured the shell scripts appropriately for
+   your system
+
+2. Send a polite Email to one of the GenThreader team:  or alternatively try
+   D.Jones@cs.ucl.ac.uk if you are desperate!
+
+3. Confused about the BLAST database to use? We recommend any large, relatively 
+   sequence complete non-redundant protein database. Uniref90 is a good choice.
+   You may also wish to download pfilt to mask low complexity and repetative 
+   sequences in the database. 
+
+#------------------------------------------------------------------------------
+#
+# Experimental BLAST+, mutliple alignment and contact prediction support
+#
+#------------------------------------------------------------------------------
+
+1. /BLAST+ now contains a script for running pGenTHREADER  and pDomTHREADER
+   with BLAST+; GenThreader.sh. This requires the new chkparse code which you 
+   should find in src/ and bin/
+   
+2. Copy then run this script from the root genTHREADER directory not from the
+   BLAST+/ directory.
+   
+3. GenThreader.sh will take multiple sequence alignments input. This 
+   functionality only works with BLAST+. Takes optional command line variables 
+   which indicate if the msa is Complete (includes all relevant close and 
+   distant relatives); Partial (includes all relevant close relavties but no 
+   distant relatives) or Seed (does not include all relevant close or distant
+   relatives)
+  
+4. Output of multiple alignments: This requires a copy of MAFFT is installed. 
+   You must change the MAFFT_DIR global variable at the top of the 
+   mafft_spliced_alignment.pl script to the path to your mafft bin/ directory.
+
+5. The GenThreader.sh script can be set to output a map of the known ligand
+   contacts in the genthreader hits, using the -c command line parameter.
+   This output has the name contactcons. This will also output jalview input
+   files for each pairwise alignment in the genthreader results. There can be
+   found in jalview_inputs
+   
+5. Additionally the -l parameter will analyse the contact map and attempt to 
+   predict contact residues in the query sequence. This requires a current 
+   installation of libsvm (tested for libsvm version 3.11). Two tracks are
+   added to the contactcons output. A contact prediction track where 0 is a
+   predcited non contact (64% accuracy) and 1 is a predicted contact (51%
+   accuracy). The second track gives the probabilty outpt from libsvm rescaled
+   to a single digit. In both track N indicates that that there was not enough 
+   data in that position to attempt a ligand binding prediction.
+

@@ -1,0 +1,833 @@
+Conf   Score  p-val  Epair  Esolv  AlnSc Alen DLen Tlen PDB_ID
+==============================================================
+GUESS   23.268  0.227     0.8   2.8   61.0  115  159  245 1a0ha
+GUESS   18.056  0.763    -0.0   0.3   47.0   39   40  245 1a6bb
+GUESS   17.000  0.975     0.2  -2.0   27.0   17  198  245 1ahja
+GUESS   16.000  1.000    12.6  -0.8   23.0   16  110  245 1awca
+GUESS   14.699  1.000    27.2   0.6   22.0   52  509  245 1amua
+GUESS   14.517  1.000     0.1  -1.2   27.0   45  283  245 1al21
+GUESS   14.478  1.000     4.0  -2.0   25.0   77  178  245 1a66a
+GUESS   13.604  1.000    -0.0  -1.1   23.0   27  162  245 1a73a
+GUESS   13.403  1.000     1.0  -1.6   22.0   37  446  245 1ad3a
+GUESS   13.261  1.000    34.1  -2.7   27.0   43  429  245 1a1va
+GUESS   12.991  1.000    -0.0  -2.3   23.0   33   55  245 1a1ta
+
+
+>>> Alignment with 1a0ha:
+                                                                   
+         ------------------------------------------------------------
+1a0ha    ------------------------------------------------------------
+                                                                     
+Query    MGSDAWVGLWRPHRPRGPIAAHYGGPGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPTQ
+         CCCCEEEECCCCCCCCCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCHH
+                 10        20        30        40        50        60
+
+
+                                                         10        20
+         ----------------------------------------CCCCCCCCCCCCCCCCCCCC
+1a0ha    ----------------------------------------SPLLETCVPDRGREYRGRLA
+                                                  |      | |         
+Query    QTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGN-ATYPS
+         HCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-CCCCC
+                 70        80        90       100       110        
+
+
+                 30              40        50        60        70  
+         CCCCCCCCCCC------CCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCEEECCCCC
+1a0ha    VTTHGSRCLAW------SSEQAKALSKDQDFNPAVPLAENFCRNPDGDEEGAWCYVADQP
+            |      |       |    |        | |           |      |      
+Query    APRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVI----------GKVSAPTCSIYGRR
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC----------CCCCCCCEECCCCC
+                 130       140       150                 160       
+
+
+             80        90       100       110       120       130  
+         CCEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-
+1a0ha    GDFEYCDLNYCEEPVDGDLGDRLGEDPDPDAAIEGRTSEDHFQPFFNEKTFGAGEADCG-
+                          ||            |           |  |    |        
+Query    A----------AGSFFEDLSKVVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVDQ
+         C----------CCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCCE
+                           180       190       200       210       
+
+
+                                    140       150       
+         -----------------------CCCCCCCCCCCCCCHHHHHHHHCCCC
+1a0ha    -----------------------LRPLFEKKQVQDQTEKELFESYIEGR
+                                                          
+Query    HRKPRGWSFGIRHSDYLAPLVTDADN-----------------------
+         EECCCCEEECCCCCCCCCCEEEECCC-----------------------
+                 230       240                          
+
+
+Percentage Identity = 10.7.
+
+
+
+>>> Alignment with 1a6bb:
+                                                                   
+         ------------------------------------------------------------
+1a6bb    ------------------------------------------------------------
+                                                                     
+Query    MGSDAWVGLWRPHRPRGPIAAHYGGPGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPTQ
+         CCCCEEEECCCCCCCCCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCHH
+                 10        20        30        40        50        60
+
+
+                                                 10        20      
+         ------------------------------CCCCCCC--CCCCCCCCCCCCCCCCCCCCC
+1a6bb    ------------------------------GERRRSQ--LDRDQCAYCKEKGHWAKDCPK
+                                       |  |||   |      |  |    |   | 
+Query    QTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGNAT-YPS
+         HCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC-CCC
+                 70        80        90       100       110        
+
+
+                   40                                              
+         CCCCCCCCCCCC------------------------------------------------
+1a6bb    KPRGPRGPRPQT------------------------------------------------
+          ||    ||                                                   
+Query    APRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLS
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCC
+                 130       140       150       160       170       
+
+
+                                                                   
+         ------------------------------------------------------------
+1a6bb    ------------------------------------------------------------
+                                                                     
+Query    KVVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVDQHRKPRGWSFGIRHSDYLAPL
+         CCCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCCEEECCCCEEECCCCCCCCCCE
+                 190       200       210       220       230       
+
+
+             
+         ------
+1a6bb    ------
+               
+Query    VTDADN
+         EEECCC
+             
+
+
+Percentage Identity = 32.5.
+
+
+
+>>> Alignment with 1ahja:
+                 10        20        30        40        50        60
+         CCCCCCCCCHHHHHHHHHHHHHCCCCCCCCHHHHHHHHHHHCCCCHHHHHHHHHHHHCHH
+1ahja    ENAAPAQAAVSDRAWALFRALDGKGLVPDGYVEGWKKTFEEDFSPRRGAELVARAWTDPE
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                 70        80        90       100       110       120
+         HHHHHHHCHHHHHHCCCCCCCCCCCEEEEECCCCEEEEEECCCCCCCCCCCCCCCCCCCC
+1ahja    FRQLLLTDGTAAVAQYGYLGPQGEYIVAVEDTPTLKNVIVCSLCSCTAWPILGLPPTWYK
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                130       140       150       160       170       180
+         CHHHHHHHHHCHHHHHHHHCCCCCCCCEEEEEECCCCCEEEEECCCCCCCCCCCHHHHHH
+1ahja    SFEYRARVVREPRKVLSEMGTEIASDIEIRVYDTTAETRYMVLPQRPAGTEGWSQEQLQE
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                190                                                
+         HCCHHHHHCCCCCCCCCC------------------------------------------
+1ahja    IVTKDCLIGVAIPQVPTV------------------------------------------
+             |   |   |  |                                            
+Query    -MGSDAWVGLWRPHRPRGPIAAHYGGPGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPT
+         -CCCCEEEECCCCCCCCCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCH
+                  10        20        30        40        50       
+
+
+                                                                   
+         ------------------------------------------------------------
+1ahja    ------------------------------------------------------------
+                                                                     
+Query    QQTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGNATYPS
+         HHCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+                  70        80        90       100       110       
+
+
+                                                                   
+         ------------------------------------------------------------
+1ahja    ------------------------------------------------------------
+                                                                     
+Query    APRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLS
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCC
+                 130       140       150       160       170       
+
+
+                                                                   
+         ------------------------------------------------------------
+1ahja    ------------------------------------------------------------
+                                                                     
+Query    KVVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVDQHRKPRGWSFGIRHSDYLAPL
+         CCCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCCEEECCCCEEECCCCCCCCCCE
+                 190       200       210       220       230       
+
+
+             
+         ------
+1ahja    ------
+               
+Query    VTDADN
+         EEECCC
+             
+
+
+Percentage Identity = 2.0.
+
+
+
+>>> Alignment with 1awca:
+                                                                   
+         ------------------------------------------------------------
+1awca    ------------------------------------------------------------
+                                                                     
+Query    MGSDAWVGLWRPHRPRGPIAAHYGGPGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPTQ
+         CCCCEEEECCCCCCCCCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCHH
+                 10        20        30        40        50        60
+
+
+                                                                   
+         ------------------------------------------------------------
+1awca    ------------------------------------------------------------
+                                                                     
+Query    QTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGNATYPSA
+         HCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+                 70        80        90       100       110       120
+
+
+                                                                   
+         ------------------------------------------------------------
+1awca    ------------------------------------------------------------
+                                                                     
+Query    PRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLSK
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCCC
+                130       140       150       160       170       180
+
+
+                                                                  10
+         -------------------------------------------------CCHHHHHHHHH
+1awca    -------------------------------------------------IQLWQFLLELL
+                                                          |     |  | 
+Query    VVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVDQHRKPRGWSFGIRHSDYLAPLV
+         CCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCCEEECCCCEEECCCCCCCCCCEE
+                190       200       210       220       230       240
+
+
+                20        30        40        50        60        70
+         CCCCCCCCCEECCCCCEEECCCHHHHHHHHHHHHCCCCCCHHHHHHHHHHHHHCCCEEEC
+1awca    TDKDARDCISWVGDEGEFKLNQPELVAQKWGQRKNKPTMNYEKLSRALRYYYDGDMICKV
+         || |                                                        
+Query    TDADN-------------------------------------------------------
+         EECCC-------------------------------------------------------
+                                                                   
+
+
+                80        90       100       110
+         CCCCCEEEECCCHHHHCCCCHHHHHHHHHHHHHHHHHHC
+1awca    QGKRFVYKFVCDLKTLIGYSAAELNRLVIECEQKKLARM
+                                                
+Query    ---------------------------------------
+         ---------------------------------------
+                                              
+
+
+Percentage Identity = 5.5.
+
+
+
+>>> Alignment with 1amua:
+                 10        20        30        40        50        60
+         CCCHHHHHHHHCCCCCCCCCCCCCHHHHHHHHHHHCCCCEEEEECCEEEEHHHHHHHHHH
+1amua    GTHEEEQYLFAVNNTKAEYPRDKTIHQLFEEQVSKRPNNVAIVCENEQLTYHELNVKANQ
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                 70        80        90       100       110       120
+         HHHHHHHCCCCCCCEEEEECCCCHHHHHHHHHHHHCCCEEEECCCCCCHHHHHHHHHHHC
+1amua    LARIFIEKGIGKDTLVGIMMEKSIDLFIGILAVLKAGGAYVPIDIEYPKERIQYILDDSQ
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                130       140       150       160       170       180
+         CCEEEECHHHHHHHCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCEEEEEEECCEEEE
+1amua    ARMLLTQKHLVHLIHNIQFNGQVEIFEEDTIKIREGTNLHVPSKSTDLAYVIYTSPKGTM
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                190       200       210       220       230       240
+         EECHHHHHHHHHHHHCCCCCCCCEEEECCCCCCCHHHHHHHHHHCCCCEEEECCHHHHCC
+1amua    LEHKGISNLKVFFENSLNVTEKDRIGQFASISFDASVWEMFMALLTGASLYIILKDTIND
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                250       260       270       280       290       300
+         HHHHHHHHHHCCCCEEEECHHHHCCCCCCCCCCCCEEEEECCCCCHHHHHHHCCCCEEEE
+1amua    FVKFEQYINQKEITVITLPPTYVVHLDPERILSIQTLITAGSATSPSLVNKWKEKVTYIN
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                310       320       330       340       350       360
+         EECCCCCCCCCEEEECCCCCCCCCCCCCEECCCEEEEEECCCCCCCCCCCEEEEEEEECC
+1amua    AYGPTETTICATTWVATKETIGHSVPIGAPIQNTQIYIVDENLQLKSVGEAGELCIGGEG
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                370       380       390       400       410       420
+         CCCEECCCHHHHHHHEEECCCCCCCEEEEEEEEEEECCCCCEEEEEECCCEEEECCEEEE
+1amua    LARGYWKRPELTSQKFVDNPFVPGEKLYKTGDQARWLSDGNIEYLGRIDNQVKIRGHRVE
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                430       440       450        460       470       
+         HHHHHHHHCCCCCEEEEEEEEEECCCCCEEEEEEEEE-CCCCCHHHHHHHHHHHCCCCCC
+1amua    LEEVESILLKHMYISETAVSVHKDHQEQPYLCAYFVS-EKHIPLEQLRQFSSEELPTYMI
+                                         |       | |            | |  
+Query    ------------------------MGSD----AWVGLWRPHRPRGPIAAHYGGPGPKYKL
+         ------------------------CCCC----EEEECCCCCCCCCCCHHHHCCCCCCCCC
+                                             10        20        30
+
+
+                 490       500                                     
+         CCEEEECCCCCCCCCCCCCCCCCCCCCCCC------------------------------
+1amua    PSYFIQLDKMPLTSNGKIDRKQLPEPDLTF------------------------------
+         |         | |     |      |  ||                              
+Query    P---------PNTGYALHDPSRPRAPAFTFGARFPTQQTTCGPGPGHLVPARMTVRGTDG
+         C---------CCCCCCCCCCCCCCCCCHHHCCCCCHHHCCCCCCCCCCCCCCEEEECCCC
+                        40        50        60        70        80 
+
+
+                                                                   
+         ------------------------------------------------------------
+1amua    ------------------------------------------------------------
+                                                                     
+Query    APAYSIYGRPRRSAPFLTPGPGRYFPERAGNATYPSAPRHTIAPRNWGVQAEQQSPGPAA
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+              90       100       110       120       130       140 
+
+
+                                                                   
+         ------------------------------------------------------------
+1amua    ------------------------------------------------------------
+                                                                     
+Query    YTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLSKVVSPGVYKSRAPQFTILARTSLP
+         CCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCC
+             150       160       170       180       190       200 
+
+
+                                                 
+         ------------------------------------------
+1amua    ------------------------------------------
+                                                   
+Query    QDNTRKPGPAAYNVDQHRKPRGWSFGIRHSDYLAPLVTDADN
+         CCCCCCCCCCCCCCCEEECCCCEEECCCCCCCCCCEEEECCC
+             210       220       230       240   
+
+
+Percentage Identity = 4.9.
+
+
+
+>>> Alignment with 1al21:
+                 10        20        30        40        50        60
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCHHH
+1al21    AATSRDALPNTEASGPTHSKEIPALTAVETGATNPLVPSDTVQTRHVVQHRSRSESSIES
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                 70        80        90       100       110       120
+         HHCCCEEEEEEEEEECCCCCCCCCCCEEEECCCCCCCHHHHHHCCEEEEEEEEEEEEEEE
+1al21    FFARGACVTIMTVDNPASTTNKDKLFAVWKITYKDTVQLRRKLEFFTYSRFDMELTFVVT
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                130       140       150       160       170       180
+         EEECCCCCCCCCCCEEEEEEECCCCCCCCCCCCHHHHCCCCCEEEEECCCCCEEEEECCC
+1al21    ANFTETNNGHALNQVYQIMYIPPGAPVPEKWDDYTWQTSSNPSIFYTYGTAPARISVPYV
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                190       200       210        220       230       
+         CCCCCEECCCCCCCCCCCCCCCHHHHCCCCCCCCCCCCC-EEEEEECCCCCCCCEEEEEE
+1al21    GISNAYSHFYDGFSKVPLKDQSAALGDSLYGAASLNDFG-ILAVRVVNDHNPTKVTSKIR
+                                               |    |     | |        
+Query    -------------------------------------MGSDAWVGLWRPHRP--------
+         -------------------------------------CCCCEEEECCCCCCC--------
+                                                      10           
+
+
+                 250       260       270       280                 
+         EEEEEEEEEEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC----------------
+1al21    VYLKPKHIRVWCPRPPRAVAYYGPGVDYKDGTLTPLSTKDLTTY----------------
+                      | | |  | |||  ||    |     |                    
+Query    -------------RGPIAAHYGGPGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPTQQT
+         -------------CCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCHHHC
+                         20        30        40        50        60
+
+
+                                                                   
+         ------------------------------------------------------------
+1al21    ------------------------------------------------------------
+                                                                     
+Query    TCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGNATYPSAPR
+         CCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+               70        80        90       100       110       120
+
+
+                                                                   
+         ------------------------------------------------------------
+1al21    ------------------------------------------------------------
+                                                                     
+Query    HTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLSKVV
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCCCCC
+              130       140       150       160       170       180
+
+
+                                                                   
+         ------------------------------------------------------------
+1al21    ------------------------------------------------------------
+                                                                     
+Query    SPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVDQHRKPRGWSFGIRHSDYLAPLVTD
+         CCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCCEEECCCCEEECCCCCCCCCCEEEE
+              190       200       210       220       230       240
+
+
+          
+         ---
+1al21    ---
+            
+Query    ADN
+         CCC
+          
+
+
+Percentage Identity = 6.1.
+
+
+
+>>> Alignment with 1a66a:
+                                                                   
+         ------------------------------------------------------------
+1a66a    ------------------------------------------------------------
+                                                                     
+Query    MGSDAWVGLWRPHRPRGPIAAHYGGPGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPTQ
+         CCCCEEEECCCCCCCCCCCHHHHCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCHH
+                 10        20        30        40        50        60
+
+
+                                                                   
+         ------------------------------------------------------------
+1a66a    ------------------------------------------------------------
+                                                                     
+Query    QTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGNATYPSA
+         HCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+                 70        80        90       100       110       120
+
+
+                                             10        20          
+         ----------------------------CCCCCCCCCCCCCEEEECCCCCCCCCCC----
+1a66a    ----------------------------MKDWQLPSHSGPYELRIEVQPKSHHRAR----
+                                                     |               
+Query    PRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLSK
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCCC
+                130       140       150       160       170       180
+
+
+               30        40        50        60        70         80
+         ------CCCCCCCCCCCCCCCCCCCEEEECCCCCCCEEEEEEEEECCCCCCCC-CCCCCC
+1a66a    ------YETEGSRGAVKASAGGHPIVQLHGYLENEPLMLQLFIGTADDRLLRP-HAFYQV
+               |          |                             |    |  | | |
+Query    VVSPGVYKSRAPQFTILARTSL-----------------------PQDNTRKPGPAAYNV
+         CCCCCCCCCCCCCCHHHCCCCC-----------------------CCCCCCCCCCCCCCC
+                190       200                              210     
+
+
+                  90              100       110       120       130
+         --CCCCCCCCCCCCCC-------EEECCEEEEEEEECCCCCCCCCCCCCCCCCCCHHHHH
+1a66a    --HRITGKTVSTTSHE-------AILSNTKVLEIPLLPENSMRAVIDCAGILKLRNSDIE
+           ||          |            |                                
+Query    DQHRKPRGWSFGIRHSDYLAPLVTDADN--------------------------------
+         CEEECCCCEEECCCCCCCCCCEEEECCC--------------------------------
+         220       230       240                                   
+
+
+              140       150       160       170      
+         CCCCCCCCCCCCCEEEEEEEEEEEECCCEEEEEEEEEEEEECCCCC
+1a66a    LRKGETDIGRKNTRVRLVFRVHVPQPSGRTLSLQVASNPIECSQRS
+                                                       
+Query    ----------------------------------------------
+         ----------------------------------------------
+                                                     
+
+
+Percentage Identity = 6.7.
+
+
+
+>>> Alignment with 1a73a:
+                 10        20        30        40        50        60
+         CCCHHHHHHHHHHHHHHHCCCCEEEEEEEEECCEEEEEEEECCCCCCCCCCCEEEEECCE
+1a73a    ALTNAQILAVIDSWEETVGQFPVITHHVPLGGGLQGTLHCYEIPLAAPYGVGFAKNGPTR
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                 70        80        90       100       110       120
+         EEEEEEECCEEEEEECCCCCCCCCCCEECCEEEEEEECCCCCCCCCCCCEEEEEHHHHHH
+1a73a    WQYKRTINQVVHRWGSHTVPFLLEPDNINGKTCTASHLCHNTRCHNPLHLCWESLDDNKG
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                130            140            150       160        
+         HHHCCCCCCC-----CCCCCCCCCCCCCCCC-----CCCCCCCCCCCCCCCC--------
+1a73a    RNWCPGPNGG-----CVHAVVCLRQGPLYGP-----GATVAGPQQRGSHFVV--------
+                          |           ||     |    ||                 
+Query    -----MGSDAWVGLWRPHRPR--------GPIAAHYGG--PGPKYKLPPNTGYALHDPSR
+         -----CCCCEEEECCCCCCCC--------CCCHHHHCC--CCCCCCCCCCCCCCCCCCCC
+                      10                20          30        40   
+
+
+                                                                   
+         ------------------------------------------------------------
+1a73a    ------------------------------------------------------------
+                                                                     
+Query    PRAPAFTFGARFPTQQTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPG
+         CCCCCHHHCCCCCHHHCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCC
+            50        60        70        80        90       100   
+
+
+                                                                   
+         ------------------------------------------------------------
+1a73a    ------------------------------------------------------------
+                                                                     
+Query    RYFPERAGNATYPSAPRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSI
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEEC
+           110       120       130       140       150       160   
+
+
+                                                                   
+         ------------------------------------------------------------
+1a73a    ------------------------------------------------------------
+                                                                     
+Query    YGRRAAGSFFEDLSKVVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVDQHRKPRG
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCCEEECCCC
+           170       180       190       200       210       220   
+
+
+                           
+         --------------------
+1a73a    --------------------
+                             
+Query    WSFGIRHSDYLAPLVTDADN
+         EEECCCCCCCCCCEEEECCC
+           230       240   
+
+
+Percentage Identity = 3.7.
+
+
+
+>>> Alignment with 1ad3a:
+                 10        20        30        40        50        60
+         CHHHHHHHHHHHHHCCCCCCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHCCCHHHHHHH
+1ad3a    SISDTVKRAREAFNSGKTRSLQFRIQQLEALQRMINENLKSISGALASDLGKNEWTSYYE
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                 70        80        90       100       110       120
+         CHHHHHHHHHHHHHHHHHHHCCEECCCCCCCCCCEEEEEEEECCEEEEECCCCCCCHHHH
+1ad3a    EVAHVLEELDTTIKELPDWAEDEPVAKTRQTQQDDLYIHSEPLGVVLVIGAWNYPFNLTI
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                130       140       150       160       170       180
+         HHHHHHHHCCCEEEEECCCCCHHHHHHHHHHHHHHCCCCCEEECCCCHHHHHHHCCCCCC
+1ad3a    QPMVGAVAAGNAVILKPSEVSGHMADLLATLIPQYMDQNLYLVVKGGVPETTELLKERFD
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                190       200       210       220       230       240
+         EEEEECCHHHHHHHHHHHHCCCCCEEEECCCCCEEEECCCCCHHHHHHHHHHHHHCCCCC
+1ad3a    HIMYTGSTAVGKIVMAAAAKHLTPVTLELGGKSPCYVDKDCDLDVACRRIAWGKFMNSGQ
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                250       260       270       280       290       300
+         CCCCCCEEEECHHHHHHHHHHHHHHHHHHHCCCCCCCCCCCCCCCHHHHHHHHHCCCCCC
+1ad3a    TCVAPDYILCDPSIQNQIVEKLKKSLKDFYGEDAKQSRDYGRIINDRHFQRVKGLIDNQK
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                310       320       330       340       350       360
+         EEECCCEECCCCEECCEEECCCCCCCCCCCCCCCCCEECEEECCCHHHHHHHHHCCCCCC
+1ad3a    VAHGGTWDQSSRYIAPTILVDVDPQSPVMQEEIFGPVMPIVCVRSLEEAIQFINQREKPL
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                370       380       390       400       410       420
+         EEEEECCCHHHHHHHHCCCCCCEEEECCCCHHHHCCCCCCCCCCCCEECCCCCHHHHHHC
+1ad3a    ALYVFSNNEKVIKKMIAETSSGGVTANDVIVHITVPTLPFGGVGNSGMGAYHGKKSFETF
+                              |     |  |    |  | |         | |       
+Query    --------------------MG----SDAWVGLWRPHRPRG----PIAAHYGG-------
+         --------------------CC----CCEEEECCCCCCCCC----CCHHHHCC-------
+                                         10            20          
+
+
+                430       440                                      
+         EEEEEEEECCCCCCCCCCCCCCCCCC----------------------------------
+1ad3a    SHRRSCLVKSLLNEEAHKARYPPSPA----------------------------------
+                          |   ||                                     
+Query    --------------PGPKYKLPPNTGYALHDPSRPRAPAFTFGARFPTQQTTCGPGPGHL
+         --------------CCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCHHHCCCCCCCCCC
+                          30        40        50        60        70
+
+
+                                                                   
+         ------------------------------------------------------------
+1ad3a    ------------------------------------------------------------
+                                                                     
+Query    VPARMTVRGTDGAPAYSIYGRPRRSAPFLTPGPGRYFPERAGNATYPSAPRHTIAPRNWG
+         CCCCEEEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+                80        90       100       110       120       130
+
+
+                                                                   
+         ------------------------------------------------------------
+1ad3a    ------------------------------------------------------------
+                                                                     
+Query    VQAEQQSPGPAAYTVPSLLGPRVIGKVSAPTCSIYGRRAAGSFFEDLSKVVSPGVYKSRA
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCEECCCCCCCCCCCCCCCCCCCCCCCCCCC
+               140       150       160       170       180       190
+
+
+                                                             
+         ------------------------------------------------------
+1ad3a    ------------------------------------------------------
+                                                               
+Query    PQFTILARTSLPQDNTRKPGPAAYNVDQHRKPRGWSFGIRHSDYLAPLVTDADN
+         CCCHHHCCCCCCCCCCCCCCCCCCCCCEEECCCCEEECCCCCCCCCCEEEECCC
+               200       210       220       230       240   
+
+
+Percentage Identity = 4.5.
+
+
+
+>>> Alignment with 1a1va:
+                 10        20        30        40        50        60
+         CCCCCCCCEEEEEECCCCCCCCCHHHHHHHCCCCCEEEEECCHHHHHHHHHHHHHHHCCC
+1a1va    PPAVPQSFQVAHLHAPTGSGKSTKVPAAYAAQGYKVLVLNPSVAATLGFGAYMSKAHGVD
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                 70        80        90       100       110       120
+         CEEECCCCEECCCCCEEEEEHHHHHHCCCCCCCCCEEEEECCCCCCHHHHHHHHHHHHHC
+1a1va    PNIRTGVRTITTGSPITYSTYGKFLADGGSGGAYDIIICDECHSTDATSILGIGTVLDQA
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                130       140       150       160       170       180
+         CCCCCCEEEEEECCCCCCCCCCCCCEEEEECCCCCCEEECCEEECCHHHHCCEEEEECCC
+1a1va    ETAGARLVVLATATPPGSVTVPHPNIEEVALSTTGEIPFYGKAIPLEVIKGGRHLIFCHS
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                190       200       210       220       230       240
+         HHHHHHHHHHHHHCCCCEEEECCCCCCCCCCCCCCEEEEECCCCCCCCCCEEEECCCCEE
+1a1va    KKKCDELAAKLVALGINAVAYYRGLDVSVIPTSGDVVVVATDALFTGDFDSVIDCNTVTQ
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                250       260       270       280       290       300
+         EEECCCCCCCEEEEECCCCCHHHHHHHHCCCCCCCCEEEEECCCCCCCCCCCCHHHHHHH
+1a1va    TVDFSLDPTFTIETTTLPQDAVSRTQRRGRTGRGKPGIYRFVAPGERPSGMFDSSVLCEC
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                310       320       330       340       350       360
+         HHHCCCCCCCHHHHHHHHHHHHHCCCCCCCCCCHHHHHHHHHHCCCCCHHHHHHHHHCCC
+1a1va    YDAGAWYELTPAETTVRLRAYMNTPGLPVCQDHLEFWEGVFTGLTHIDAHFLSQTKQSGE
+                                                                     
+Query    ------------------------------------------------------------
+         ------------------------------------------------------------
+                                                                   
+
+
+                370       380       390        400       410       
+         CCHHHHHHHHHHHHHHCCCCCCCCHHHHHHCCC-CCCCCCCEECCCCCCCCCCCEECCCH
+1a1va    NFPYLVAYQATVCARAQAPPPSWDQMWKCLIRL-KPTLHGPTPLLYRLGAVQNEVTLTHP
+                                   |  | |   |   ||    |  |       |  |
+Query    ---------------------MGSDAWVGLWRPHRP--RGPIAAHY--GGPGPKYKLP-P
+         ---------------------CCCCEEEECCCCCCC--CCCCHHHH--CCCCCCCCCC-C
+                                      10          20          30   
+
+
+                                                                   
+         HHHHHHHHHC--------------------------------------------------
+1a1va    ITKYIMTCMS--------------------------------------------------
+          | |     |                                                  
+Query    NTGYALHDPSRPRAPAFTFGARFPTQQTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPR
+         CCCCCCCCCCCCCCCCHHHCCCCCHHHCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCC
+             40        50        60        70        80        90  
+
+
+                                                                   
+         ------------------------------------------------------------
+1a1va    ------------------------------------------------------------
+                                                                     
+Query    RSAPFLTPGPGRYFPERAGNATYPSAPRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRV
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+            100       110       120       130       140       150  
+
+
+                                                                   
+         ------------------------------------------------------------
+1a1va    ------------------------------------------------------------
+                                                                     
+Query    IGKVSAPTCSIYGRRAAGSFFEDLSKVVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAA
+         CCCCCCCCEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCC
+            160       170       180       190       200       210  
+
+
+                                      
+         -------------------------------
+1a1va    -------------------------------
+                                        
+Query    YNVDQHRKPRGWSFGIRHSDYLAPLVTDADN
+         CCCCEEECCCCEEECCCCCCCCCCEEEECCC
+            220       230       240   
+
+
+Percentage Identity = 5.3.
+
+
+
+>>> Alignment with 1a1ta:
+                 10        20           30        40        50     
+         CCCHHHHHHHHCCCCCCCCCC---CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC--
+1a1ta    MQKGNFRNQRKTVKCFNCGKE---GHIAKNCRAPRKKGCWKCGKEGHQMKDCTERQAN--
+                           |     |        ||       |  |   |          
+Query    -----------------MGSDAWVGLWRPH--RPRGPIAAHYGGPGPKYKLPPN---TGY
+         -----------------CCCCEEEECCCCC--CCCCCCHHHHCCCCCCCCCCCC---CCC
+                                  10          20        30         
+
+
+                                                                   
+         ------------------------------------------------------------
+1a1ta    ------------------------------------------------------------
+                                                                     
+Query    ALHDPSRPRAPAFTFGARFPTQQTTCGPGPGHLVPARMTVRGTDGAPAYSIYGRPRRSAP
+         CCCCCCCCCCCCHHHCCCCCHHHCCCCCCCCCCCCCCEEEECCCCCCCCCCCCCCCCCCC
+                   50        60        70        80        90      
+
+
+                                                                   
+         ------------------------------------------------------------
+1a1ta    ------------------------------------------------------------
+                                                                     
+Query    FLTPGPGRYFPERAGNATYPSAPRHTIAPRNWGVQAEQQSPGPAAYTVPSLLGPRVIGKV
+         CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+                  110       120       130       140       150      
+
+
+                                                                   
+         ------------------------------------------------------------
+1a1ta    ------------------------------------------------------------
+                                                                     
+Query    SAPTCSIYGRRAAGSFFEDLSKVVSPGVYKSRAPQFTILARTSLPQDNTRKPGPAAYNVD
+         CCCCEECCCCCCCCCCCCCCCCCCCCCCCCCCCCCCHHHCCCCCCCCCCCCCCCCCCCCC
+                  170       180       190       200       210      
+
+
+                                  
+         ---------------------------
+1a1ta    ---------------------------
+                                    
+Query    QHRKPRGWSFGIRHSDYLAPLVTDADN
+         EEECCCCEEECCCCCCCCCCEEEECCC
+                  230       240   
+
+
+Percentage Identity = 12.7.
+
