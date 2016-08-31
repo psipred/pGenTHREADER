@@ -8,29 +8,30 @@
 # Jan 2009 alobley@cs.ucl.ac.uk
 #------------------------------------------------------------------------------
 
-#JOB name 
+#JOB name
 JOB=$1
 #input file
 FSA=$2
 #path to psiblast
-PSIB=/scratch0/NOT_BACKED_UP/dbuchan/blast-2.2.18/bin
+PSIB=/Users/dbuchan/Code/blast-2.2.26/bin
 #path to database
-DB=/scratch0/NOT_BACKED_UP/dbuchan/uniref90/uniref90.fasta
+DB=/Users/dbuchan/Code/uniref_test_db/uniref_test.fasta
 #path to PSIPRED data files
-PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/ 
+PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/
 #path to pGenTHREADER data files
 DATA=./data/
 #path to PGenThreader binary directory
 PGT=./bin
 #path to PSIPRED binary directory
-PSIP=/scratch0/NOT_BACKED_UP/dbuchan/psipred/bin
+PSIP=/Users/dbuchan/Code/psipred/bin
 #path to fold library
-TDB=/scratch0/NOT_BACKED_UP/dbuchan/GenTHREADER/corrected_tdb
+TDB=/Users/dbuchan/Code/pGenTHREADER/
 #TDB=/scratch0/NOT_BACKED_UP/dbuchan/tdb
 
 
 #make a masked copy of input file
-$PSIP/pfilt -f $FSA > $JOB.fsa
+#$PSIP/pfilt -f $FSA > $JOB.fsa
+cp %FSA $JOB.fsa
 
 export TDB_DIR=$TDB
 export THREAD_DIR=./data
@@ -60,7 +61,7 @@ $PSIP/psipred $JOB.iter3.mtx $PDATA/weights.dat $PDATA/weights.dat2 $PDATA/weigh
 $PSIP/psipass2 $PDATA/weights_p2.dat 1 1.0 1.0 $JOB.pgen.ss2 $JOB.pgen.ss > $JOB.horiz
 
 
-if [ ! -s "$JOB.pgen.ss2" ] 
+if [ ! -s "$JOB.pgen.ss2" ]
 then
    echo "PSIPRED failed ... exiting early"
    echo "PSIPRED failed ... exiting early" >> $JOB.pgt.log
@@ -93,7 +94,7 @@ $PGT/pseudo_bas -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseud
 
 if [ ! -s "$JOB.pgen.pseudo" ]
 then
-    echo "pseudo_bas failed" 
+    echo "pseudo_bas failed"
     echo "pseudo_bas failed" >> $JOB.pgt.log
     exit;
 fi
