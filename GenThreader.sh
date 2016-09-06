@@ -95,7 +95,8 @@ do case "$o" in
 	M) BUILD_MULTI=1;;
 	l) LIGAND_PRED=1;;
 	L) LIBSVM="$OPTARG";;
-	h) echo >&2 "Usage: $0 -i file -j 'job_name' [-d] [-m] [-M] [-r] [-R] [-c] [-l] [-L /libsvm/] [-C CSA_file] [-b /blast_bin_path] [-u /uniref90_path] [-p /psipred_data_path] [-P /psipred_bin_path] [-t /tdb_path]"
+	s) BUILD_MODELS=1;;
+	h) echo >&2 "Usage: $0 -i file -j 'job_name' [-d] [-m] [-M] [-r] [-R] [-c] [-l] [-s] [-L /libsvm/] [-C CSA_file] [-b /blast_bin_path] [-u /uniref90_path] [-p /psipred_data_path] [-P /psipred_bin_path] [-t /tdb_path]"
 		echo "  -i Input fasta file"
 		echo "  -j Job name"
 		echo "  -d toggle between genthreader and domthreader code (ensure you set -t correctly)"
@@ -112,6 +113,7 @@ do case "$o" in
 		echo "  -C specify the name of a different CSA zip file availalble from http://www.ebi.ac.uk/thornton-srv/databases/CSA/archive/"
 		echo "  -l flag for running ligand binding prediction"
 		echo "  -L specify directory location of libsvm's svm-predict"
+		echo "  -s control is structural models are produced"
 		echo ""
 		echo "pGenTHREADER Example: genthreader.sh -i test.fa -j test"
 		echo "pDomTHREADER Example: genthreader.sh -i test.fa -j test -d"
@@ -277,7 +279,12 @@ else
 	fi
 
 	#Ok we still don't have anything to do here about returning alignments. Answers on a postcard to the usual address
-	$PGT/pseudo_bas -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
+	if [ $BUILD_MODELS == 1]
+  then
+	  $PGT/pseudo_bas -m$JOB -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
+  else
+		$PGT/pseudo_bas -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
+	fi
 fi
 
 #Here's a whole load of ancilliary bonus processes that you can calculate
