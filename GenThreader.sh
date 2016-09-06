@@ -142,7 +142,7 @@ then
 	RELATIVES_COMPLETE=0
 fi
 
-if [ $LIGAND_PRED ]
+if [ $LIGAND_PRED == 1 ]
 then
 	if [ $TYPE != 1 ]
 	then
