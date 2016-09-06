@@ -77,7 +77,7 @@ LIGAND_PRED=0
 LIBSVM=/scratch0/NOT_BACKED_UP/dbuchan/libsvm-3.11/
 ERROR=0;
 
-while getopts i:j:b:u:p:P:t:C:L:ldcmrRhM o
+while getopts i:j:b:u:p:P:t:C:L:ldcmrRhMs o
 do case "$o" in
 	i) FSA="$OPTARG";;
 	j) JOB="$OPTARG";;
