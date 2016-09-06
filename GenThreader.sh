@@ -41,12 +41,12 @@ MSA=0
 MSA_COMPLETE=0
 #msa has all possible relatives
 RELATIVES_COMPLETE=0
+#Whether to build C-alpha structural models
+BUILD_MODELS=0
 #flag to toggle building multiple alignments, requires MAFFT install
 BUILD_MULTI=0
 #flat to toggle building of contact consensus mapping
 BUILD_CONTACTS=0
-#Whether to build C-alpha structural models
-BUILD_MODELS=0
 #Name of the Catalytic site atlas file
 CSA=CSA_2_2_12.dat
 #path to psiblast/ncbi tools
@@ -77,7 +77,7 @@ LIGAND_PRED=0
 LIBSVM=/scratch0/NOT_BACKED_UP/dbuchan/libsvm-3.11/
 ERROR=0;
 
-while getopts i:j:b:u:p:P:t:C:L:ldcmrRhMs o
+while getopts i:j:b:u:p:P:t:C:L:ldcmrRhM o
 do case "$o" in
 	i) FSA="$OPTARG";;
 	j) JOB="$OPTARG";;
@@ -95,8 +95,7 @@ do case "$o" in
 	M) BUILD_MULTI=1;;
 	l) LIGAND_PRED=1;;
 	L) LIBSVM="$OPTARG";;
-	s) BUILD_MODELS=1
-	h) echo >&2 "Usage: $0 -i file -j 'job_name' [-d] [-m] [-M] [-r] [-R] [-c] [-l] [-s] [-L /libsvm/] [-C CSA_file] [-b /blast_bin_path] [-u /uniref90_path] [-p /psipred_data_path] [-P /psipred_bin_path] [-t /tdb_path]"
+	h) echo >&2 "Usage: $0 -i file -j 'job_name' [-d] [-m] [-M] [-r] [-R] [-c] [-l] [-L /libsvm/] [-C CSA_file] [-b /blast_bin_path] [-u /uniref90_path] [-p /psipred_data_path] [-P /psipred_bin_path] [-t /tdb_path]"
 		echo "  -i Input fasta file"
 		echo "  -j Job name"
 		echo "  -d toggle between genthreader and domthreader code (ensure you set -t correctly)"
@@ -278,12 +277,7 @@ else
 	fi
 
 	#Ok we still don't have anything to do here about returning alignments. Answers on a postcard to the usual address
-	if [ $BUILD_MODELS == 1]
-  then
-	  $PGT/pseudo_bas -m$JOB -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
-  else
-		$PGT/pseudo_bas -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
-	fi
+	$PGT/pseudo_bas -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
 fi
 
 #Here's a whole load of ancilliary bonus processes that you can calculate
