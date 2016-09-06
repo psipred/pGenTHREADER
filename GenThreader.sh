@@ -151,7 +151,8 @@ then
 	fi
 fi
 #make a masked copy of input file
-$PSIP/pfilt -f $FSA > $JOB.fsa
+#$PSIP/pfilt -f $FSA > $JOB.fsa
+cp $FSA $JOB.fsa
 
 export TDB_DIR=$TDB
 export THREAD_DIR=./data
