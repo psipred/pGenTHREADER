@@ -55,16 +55,17 @@ PSIB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/ncbi-blast-2.2.31+/bin/
 #path to database
 DB=/scratch0/NOT_BACKED_UP/dbuchan/uniref/uniref90.fasta
 #path to PSIPRED data files
-PDATA=/usr/local/lib/psipred/
+PDATA=/cs/research/bioinf/home1/green/dbuchan/Code/psipred/data/
 #PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/
 #path to pGenTHREADER data files
 DATA=./data/
 #path to PGenThreader binary directory
 PGT=./bin
 #path to PSIPRED binary directory
-PSIP=/cs/research/bioinf/home1/green/dbuchan/Code/psipred40/bin/
+PSIP=/cs/research/bioinf/home1/green/dbuchan/Code/psipred/bin/
 #path to fold library
-TDB=/scratch0/NOT_BACKED_UP/dbuchan/GenTHREADER/corrected_tdb/
+TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/tdb/
+CATH_TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/cath_domain_tdb/
 #location of experimental scripts
 BLAST=./BLAST+
 #Name of your PSICHAIN file
@@ -115,8 +116,8 @@ do case "$o" in
 		echo "  -L specify directory location of libsvm's svm-predict"
 		echo "  -s control is structural models are produced"
 		echo ""
-		echo "pGenTHREADER Example: genthreader.sh -i test.fa -j test"
-		echo "pDomTHREADER Example: genthreader.sh -i test.fa -j test -d"
+		echo "pGenTHREADER Example: GenThreader.sh -i test.fa -j test"
+		echo "pDomTHREADER Example: GenThreader.sh -i test.fa -j test -d"
 		echo ""
 		exit 1;;
 	[?]) ERROR=1;;
@@ -210,6 +211,7 @@ echo "Finished PSIPRED"
 
 if [ $TYPE == 1 ]
 then
+	export TDB_DIR=$CATH_TDB
 	#We're going to run domthreader
 	echo "Matching domTHREADER tdb files"
 	$PGT/pseudo_bas_dom -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter3.mtx $JOB.pdom.pseudo $DATA/$DOMCHAIN > $JOB.pdom.output
@@ -220,7 +222,7 @@ then
     	echo "pseudobas failed" >> $JOB.pdt.log
     	exit;
 	fi
-echo "svm_prob_dom"
+  echo "svm_prob_dom"
 	$PGT/svm_prob_dom $JOB.pdom.pseudo | sort -k 2,2rn -k 6,6rn -k 5,5g  > $JOB.pdom.presults
 
 	if [ ! -s "$JOB.pdom.presults" ]
@@ -231,8 +233,12 @@ echo "svm_prob_dom"
 	fi
 echo "pseudo bas dom 2"
 	#No multiple alignments yet, watch this space.
-	$PGT/pseudo_bas_dom -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter3.mtx $JOB.pdom.pseudo $JOB.pdom.presults > $JOB.pdom.align
-
+	if [ $BUILD_MODELS == 1 ]
+  then
+		$PGT/pseudo_bas_dom -m$JOB -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter3.mtx $JOB.pdom.pseudo $JOB.pdom.presults > $JOB.pdom.align
+	else
+		$PGT/pseudo_bas_dom -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter3.mtx $JOB.pdom.pseudo $JOB.pdom.presults > $JOB.pdom.align
+	fi
 else
 	#We're going to run genthreader
 	if [ $RELATIVES_COMPLETE == 0 ]
@@ -280,7 +286,7 @@ else
 	fi
 
 	#Ok we still don't have anything to do here about returning alignments. Answers on a postcard to the usual address
-	if [ $BUILD_MODELS == 1]
+	if [ $BUILD_MODELS == 1 ]
   then
 	  $PGT/pseudo_bas -m$JOB -S -p -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $JOB.pgen.presults > $JOB.pgen.align
   else
