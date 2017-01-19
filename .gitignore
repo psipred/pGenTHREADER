@@ -1,3 +1,9 @@
 cath_domain_tdb/
 tdb/
 bin/
+.blast
+.horiz
+.iter3.mtx
+.pgen.ss
+.pgt.log
+test.*
