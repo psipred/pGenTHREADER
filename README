@@ -1,7 +1,7 @@
 ###############################################################################
 #
-# README created 10/02/2009 
-# 
+# README created 10/02/2009
+#
 # INSTALL and test instructions for pGen/DomTHREADER
 # VERSION 8.9
 # Author: alobley@cs.ucl.ac.uk d.buchan@cs.ucl.ac.uk
@@ -29,6 +29,9 @@
 # Changes in 8.3
 # - Addition of MSA and BLAST+ methods
 #
+# Changes in 8.3.1
+# - Ligand contact prediction removed
+#
 ###############################################################################
 
 Follow the steps:
@@ -47,7 +50,7 @@ Follow the steps:
 	prompt/tdb> tar -xvzf cath_tdb.tgz fold_lib.tar.gz
 
 NOTE: At present there is no software available to create fold libraries, but
-up to date libraries can be downloaded from our site. Support for user-created 
+up to date libraries can be downloaded from our site. Support for user-created
 fold libraries will be added in a future release.
 
 #------------------------------------------------------------------------------
@@ -66,7 +69,7 @@ fold libraries will be added in a future release.
 	prompt/src> make install
 
 #------------------------------------------------------------------------------
-# 
+#
 # Configure the shell script for your system
 #
 #
@@ -88,10 +91,11 @@ fold libraries will be added in a future release.
 #
 #------------------------------------------------------------------------------
 
-9. prompt> sh pGenThreader.sh pgen_test test/test.fsa
+9. prompt> sh pGenThreader.sh -j pgen_test -i test/test.fsa
 
-10.prompt> sh pDomThreader.sh pdom_test test/test.fsa
+10.prompt> sh pDomThreader.sh -j pdom_test -i test/test.fsa
 
+11.prompt> sh GenThreader.sh -j test -i test/test.fsa
 
 #------------------------------------------------------------------------------
 #
@@ -110,17 +114,17 @@ fold libraries will be added in a future release.
 #
 #------------------------------------------------------------------------------
 
-1. Check with your system administrator that you have installed the binaries 
+1. Check with your system administrator that you have installed the binaries
    correctly and that you have configured the shell scripts appropriately for
    your system
 
 2. Send a polite Email to one of the GenThreader team:  or alternatively try
    D.Jones@cs.ucl.ac.uk if you are desperate!
 
-3. Confused about the BLAST database to use? We recommend any large, relatively 
+3. Confused about the BLAST database to use? We recommend any large, relatively
    sequence complete non-redundant protein database. Uniref90 is a good choice.
-   You may also wish to download pfilt to mask low complexity and repetative 
-   sequences in the database. 
+   You may also wish to download pfilt to mask low complexity and repetative
+   sequences in the database.
 
 #------------------------------------------------------------------------------
 #
@@ -129,21 +133,21 @@ fold libraries will be added in a future release.
 #------------------------------------------------------------------------------
 
 1. /BLAST+ now contains a script for running pGenTHREADER  and pDomTHREADER
-   with BLAST+; GenThreader.sh. This requires the new chkparse code which you 
+   with BLAST+; GenThreader.sh. This requires the new chkparse code which you
    should find in src/ and bin/
-   
+
 2. Copy then run this script from the root genTHREADER directory not from the
    BLAST+/ directory.
-   
-3. GenThreader.sh will take multiple sequence alignments input. This 
-   functionality only works with BLAST+. Takes optional command line variables 
-   which indicate if the msa is Complete (includes all relevant close and 
-   distant relatives); Partial (includes all relevant close relavties but no 
+
+3. GenThreader.sh will take multiple sequence alignments input. This
+   functionality only works with BLAST+. Takes optional command line variables
+   which indicate if the msa is Complete (includes all relevant close and
+   distant relatives); Partial (includes all relevant close relavties but no
    distant relatives) or Seed (does not include all relevant close or distant
    relatives)
-  
-4. Output of multiple alignments: This requires a copy of MAFFT is installed. 
-   You must change the MAFFT_DIR global variable at the top of the 
+
+4. Output of multiple alignments: This requires a copy of MAFFT is installed.
+   You must change the MAFFT_DIR global variable at the top of the
    mafft_spliced_alignment.pl script to the path to your mafft bin/ directory.
 
 5. The GenThreader.sh script can be set to output a map of the known ligand
@@ -151,13 +155,3 @@ fold libraries will be added in a future release.
    This output has the name contactcons. This will also output jalview input
    files for each pairwise alignment in the genthreader results. There can be
    found in jalview_inputs
-   
-5. Additionally the -l parameter will analyse the contact map and attempt to 
-   predict contact residues in the query sequence. This requires a current 
-   installation of libsvm (tested for libsvm version 3.11). Two tracks are
-   added to the contactcons output. A contact prediction track where 0 is a
-   predcited non contact (64% accuracy) and 1 is a predicted contact (51%
-   accuracy). The second track gives the probabilty outpt from libsvm rescaled
-   to a single digit. In both track N indicates that that there was not enough 
-   data in that position to attempt a ligand binding prediction.
-

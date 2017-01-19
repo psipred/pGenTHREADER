@@ -27,7 +27,41 @@
 #			United pGenTHREADER.sh and pDomTHEADER.sh to a single GenThreader.sh
 # Jan 2012	dbuchan@cs.ucl.ac.uk
 #			Added ligand binding prediction step
+# Jan 2017 daniel.buchan@ucl.ac.uk
+#     Removed non-working ligand binding prediction step
+#
 #-------------------------------------------------------------------------------
+
+################################
+# USER TO SET THESE PATHS/VARS #
+################################
+CSA=CSA_2_2_12.dat
+#path to psiblast/ncbi tools
+#PSIB=/usr/local/bin/
+PSIB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/ncbi-blast-2.2.31+/bin/
+#path to database
+DB=/scratch1/NOT_BACKED_UP/dbuchan/uniref/uniref_test_db/uniref_test.fasta
+#path to PSIPRED data files
+PDATA=/home/dbuchan/Code/psipred/data
+#PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/
+#path to pGenTHREADER data files
+DATA=./data/
+#path to PGenThreader binary directory
+PGT=./bin
+#path to PSIPRED binary directory
+PSIP=/home/dbuchan/Code/psipred/bin
+#path to fold library
+TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/tdb/
+CATH_TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/cath_domain_tdb/
+#location of experimental scripts
+BLAST=./BLAST+
+#Name of your PSICHAIN file
+PSICHAIN=psichain.lst
+#Name of your dom chain file
+DOMCHAIN=cath_dom.lst
+##################
+# END USER INPUT #
+##################
 
 #JOB name
 JOB=''
@@ -48,37 +82,13 @@ BUILD_MULTI=0
 #flat to toggle building of contact consensus mapping
 BUILD_CONTACTS=0
 #Name of the Catalytic site atlas file
-CSA=CSA_2_2_12.dat
-#path to psiblast/ncbi tools
-#PSIB=/usr/local/bin/
-PSIB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/ncbi-blast-2.2.31+/bin/
-#path to database
-DB=/scratch0/NOT_BACKED_UP/dbuchan/uniref/uniref90.fasta
-#path to PSIPRED data files
-PDATA=/cs/research/bioinf/home1/green/dbuchan/Code/psipred/data/
-#PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/
-#path to pGenTHREADER data files
-DATA=./data/
-#path to PGenThreader binary directory
-PGT=./bin
-#path to PSIPRED binary directory
-PSIP=/cs/research/bioinf/home1/green/dbuchan/Code/psipred/bin/
-#path to fold library
-TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/tdb/
-CATH_TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/cath_domain_tdb/
-#location of experimental scripts
-BLAST=./BLAST+
-#Name of your PSICHAIN file
-PSICHAIN=psichain.lst
-#Name of your dom chain file
-DOMCHAIN=cath_dom.lst
 #Toggle whether or not to run the ligand binding prediction at the end
-LIGAND_PRED=0
+# LIGAND_PRED=0
 #Directory that contains the svm-predict executable from libsvm
-LIBSVM=/scratch0/NOT_BACKED_UP/dbuchan/libsvm-3.11/
+#LIBSVM=/scratch0/NOT_BACKED_UP/dbuchan/libsvm-3.11/
 ERROR=0;
 
-while getopts i:j:b:u:p:P:t:C:L:ldcmrRhMs o
+while getopts i:j:b:u:p:P:t:C:L:dcmrRhMs o
 do case "$o" in
 	i) FSA="$OPTARG";;
 	j) JOB="$OPTARG";;
@@ -94,10 +104,9 @@ do case "$o" in
 	P) PSIP="$OPTARG";;
 	t) TDB="$OPTARG";;
 	M) BUILD_MULTI=1;;
-	l) LIGAND_PRED=1;;
 	L) LIBSVM="$OPTARG";;
 	s) BUILD_MODELS=1;;
-	h) echo >&2 "Usage: $0 -i file -j 'job_name' [-d] [-m] [-M] [-r] [-R] [-c] [-l] [-s] [-L /libsvm/] [-C CSA_file] [-b /blast_bin_path] [-u /uniref90_path] [-p /psipred_data_path] [-P /psipred_bin_path] [-t /tdb_path]"
+	h) echo >&2 "Usage: $0 -i file -j 'job_name' [-d] [-m] [-M] [-r] [-R] [-c] [-s] [-L /libsvm/] [-C CSA_file] [-b /blast_bin_path] [-u /uniref90_path] [-p /psipred_data_path] [-P /psipred_bin_path] [-t /tdb_path]"
 		echo "  -i Input fasta file"
 		echo "  -j Job name"
 		echo "  -d toggle between genthreader and domthreader code (ensure you set -t correctly)"
@@ -112,7 +121,6 @@ do case "$o" in
 		echo "  -M build multiple alignment of CERT, GOOD and MED hits, requires MAFFT and that the mafft_spliced_alignment.pl script is correctly configured "
 		echo "  -c build map of residue contacts; requires internet connection. Will not work with -d option"
 		echo "  -C specify the name of a different CSA zip file availalble from http://www.ebi.ac.uk/thornton-srv/databases/CSA/archive/"
-		echo "  -l flag for running ligand binding prediction"
 		echo "  -L specify directory location of libsvm's svm-predict"
 		echo "  -s control is structural models are produced"
 		echo ""
@@ -143,14 +151,14 @@ then
 	RELATIVES_COMPLETE=0
 fi
 
-if [ $LIGAND_PRED == 1 ]
-then
-	if [ $TYPE != 1 ]
-	then
-	echo "Ligand binding prediction selected so -c is set to 1"
-	BUILD_CONTACTS=1
-	fi
-fi
+# if [ $LIGAND_PRED == 1 ]
+# then
+# 	if [ $TYPE != 1 ]
+# 	then
+# 	echo "Ligand binding prediction selected so -c is set to 1"
+# 	BUILD_CONTACTS=1
+# 	fi
+# fi
 #make a masked copy of input file
 #$PSIP/pfilt -f $FSA > $JOB.fsa
 cp $FSA $JOB.fsa
@@ -267,7 +275,7 @@ else
 
 	# Run PGenThreader process
 	echo "Matching GenTHREADER tdb files"
-	$PGT/pseudo_bas  -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $DATA/$PSICHAIN
+	$PGT/pseudo_bas -c11.0 -C20 -h0.2 -F$JOB.pgen.ss2 $JOB.iter6.mtx $JOB.pgen.pseudo $DATA/$PSICHAIN
 
 	if [ ! -s "$JOB.pgen.pseudo" ]
 	then
@@ -308,12 +316,12 @@ then
 	$PGT/GenAlignmentHandler/main.rb ./$JOB.pgen ./$CSA
 fi
 
-if [ $LIGAND_PRED == 1 ]
-then
-	echo "$PGT/predict_contacts.pl $LIBSVM $DATA $JOB > output"
-	$PGT/predict_contacts.pl $LIBSVM $DATA $JOB > output
-	echo "mv output $JOB.pgen.contactcons"
-	mv output $JOB.pgen.contactcons
-	#echo "$PGT/process_contacts.pl"
-fi
+# if [ $LIGAND_PRED == 1 ]
+# then
+# 	echo "$PGT/predict_contacts.pl $LIBSVM $DATA $JOB > output"
+# 	$PGT/predict_contacts.pl $LIBSVM $DATA $JOB > output
+# 	echo "mv output $JOB.pgen.contactcons"
+# 	mv output $JOB.pgen.contactcons
+# 	#echo "$PGT/process_contacts.pl"
+# fi
 echo Finished `date` >> $JOB.pdt.log
