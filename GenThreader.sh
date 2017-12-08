@@ -164,7 +164,7 @@ fi
 cp $FSA $JOB.fsa
 
 export TDB_DIR=$TDB
-export THREAD_DIR=./data
+export THREAD_DIR=$DATA
 
 echo started `date` $HOST > $JOB.pgt.log
 
