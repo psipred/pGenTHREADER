@@ -44,15 +44,15 @@ DB=/scratch1/NOT_BACKED_UP/dbuchan/uniref/uniref_test_db/uniref_test.fasta
 #path to PSIPRED data files
 PDATA=/home/dbuchan/Code/psipred/data
 #PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/
-#path to pGenTHREADER data files
-DATA=./data/
+#path to pGenTHREADER data files. Leave the trailing slash off this one
+DATA=./data
 #path to PGenThreader binary directory
 PGT=./bin
 #path to PSIPRED binary directory
 PSIP=/home/dbuchan/Code/psipred/bin
-#path to fold library
-TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/tdb/
-CATH_TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/cath_domain_tdb/
+#path to fold library leave the trailing slash off these
+TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/tdb
+CATH_TDB=/scratch0/NOT_BACKED_UP/dbuchan/Applications/genthreader/cath_domain_tdb
 #location of experimental scripts
 BLAST=./BLAST+
 #Name of your PSICHAIN file
