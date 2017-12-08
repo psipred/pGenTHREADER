@@ -45,9 +45,9 @@ DB=/scratch1/NOT_BACKED_UP/dbuchan/uniref/uniref_test_db/uniref_test.fasta
 PDATA=/home/dbuchan/Code/psipred/data
 #PDATA=/scratch0/NOT_BACKED_UP/dbuchan/psipred/data/
 #path to pGenTHREADER data files
-DATA=./data/
+DATA=/home/dbuchan/Code/genthreader/data/
 #path to PGenThreader binary directory
-PGT=./bin
+PGT=/home/dbuchan/Code/genthreader/bin/
 #path to PSIPRED binary directory
 PSIP=/home/dbuchan/Code/psipred/bin
 #path to fold library
@@ -177,8 +177,8 @@ then
 		cp $FSA ./tmp_db.fa
 		echo "$PSIB/makeblastdb -in $FSA -out tmp_db"
 		$PSIB/makeblastdb -in $FSA -out tmp_db
-		echo "$PSIB/psiblast -db ./tmp_db -in_msa $FSA -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_iterations 2 -num_alignments 0 >& $JOB.blast"
-		$PSIB/psiblast -db ./tmp_db -in_msa $FSA -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_iterations 2 -num_alignments 0 >& $JOB.blast
+		echo "$PSIB/psiblast -db ./tmp_db -in_msa $FSA -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_descriptions 5000 -num_iterations 2 -num_alignments 0 >& $JOB.blast"
+		$PSIB/psiblast -db ./tmp_db -in_msa $FSA -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_descriptions 5000  -num_iterations 2 -num_alignments 0 >& $JOB.blast
 		rm tmp_db*
 		echo "chk file prepared"
 
@@ -190,8 +190,8 @@ then
 else
  #Input file is a single fasta sequence echo "$PSIB/psiblast -db $DB -query $FSA -inclusion_ethresh 0.001 -out_pssm $JOB.chk -in_pssm $JOB.iter3.chk -num_iterations 3 -num_alignments 0 >& $JOB.blast"
  echo "Running initial fasta psiblast"
- echo "$PSIB/psiblast -db $DB -query $JOB.fsa -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_iterations 3 -num_alignments 0 >& $JOB.blast"
- $PSIB/psiblast -db $DB -query $JOB.fsa -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_iterations 3 -num_alignments 0 >& $JOB.blast
+ echo "$PSIB/psiblast -db $DB -query $JOB.fsa -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_iterations 3 -num_descriptions 5000 -num_alignments 0 >& $JOB.blast"
+ $PSIB/psiblast -db $DB -query $JOB.fsa -inclusion_ethresh 0.001 -out_pssm $JOB.chk -num_iterations 3 -num_descriptions 5000 -num_alignments 0 >& $JOB.blast
  echo "Finished 3 iterations PSI-BLAST"
 fi
 
@@ -252,8 +252,8 @@ else
 	if [ $RELATIVES_COMPLETE == 0 ]
 	then
 		#$PSIB/blastpgp -a 4 -F T -t 1 -i $JOB.fsa -R $JOB.iter3.chk -d $DB -j 3 -v 5000 -b 0 -h 0.001 -C $JOB.chk > /dev/null
-		echo "$PSIB/psiblast -db $DB -inclusion_ethresh 0.001 -out_pssm $JOB.chk -in_pssm $JOB.iter3.chk -num_iterations 3 -num_alignments 0 >& $JOB.blast"
-		$PSIB/psiblast -db $DB -inclusion_ethresh 0.001 -out_pssm $JOB.chk -in_pssm $JOB.iter3.chk -num_iterations 3 -num_alignments 0 >& $JOB.blast
+		echo "$PSIB/psiblast -db $DB -inclusion_ethresh 0.001 -out_pssm $JOB.chk -in_pssm $JOB.iter3.chk -num_iterations 3 -num_descriptions 5000 -num_alignments 0 >& $JOB.blast"
+		$PSIB/psiblast -db $DB -inclusion_ethresh 0.001 -out_pssm $JOB.chk -in_pssm $JOB.iter3.chk -num_iterations 3 -num_descriptions 5000 -num_alignments 0 >& $JOB.blast
 
 		echo "Finished 6 iterations of PSI BLAST"
 
