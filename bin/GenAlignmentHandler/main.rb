@@ -4,8 +4,10 @@
 # Takes the genthreader alignments and outputs jalview alignment and annotation
 # files and a contact residue consensus
 #
-
-require "./bin/GenAlignmentHandler/lib/gen_alignment_handler.rb"
+#
+path = File.dirname(__FILE__)
+# puts path
+require path+"/lib/gen_alignment_handler.rb"
 
 name = ARGV[0]
 csa = ARGV[1]
