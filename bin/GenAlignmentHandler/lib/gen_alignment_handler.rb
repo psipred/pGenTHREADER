@@ -6,7 +6,7 @@ class GenAlignmentHandler
   require "pp"
   require "uri"
   require 'net/http'
-  require 'jcode' 
+  require 'jcode' if RUBY_VERSION < '1.9' 
   
   def initialize(name,csa)
 	@jobName = name
