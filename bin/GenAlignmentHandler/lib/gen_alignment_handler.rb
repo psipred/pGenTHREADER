@@ -6,8 +6,8 @@ class GenAlignmentHandler
   require "pp"
   require "uri"
   require 'net/http'
-  require 'jcode' if RUBY_VERSION < '1.9' 
-  
+  require 'jcode' if RUBY_VERSION < '1.9'
+
   def initialize(name,csa)
 	@jobName = name
 	@CSA = csa
@@ -18,36 +18,36 @@ class GenAlignmentHandler
 	@PgenTable = ''
 	@PgenAlignments = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
 	@Alignments = ''
-	
+
 	@path = ""
-	
+
 	if File.exist? csa
 		puts "CSA present"
 	else
-		
+
 		csa_file = ''
 		csa_path = ''
 		if csa =~ /(.+\/)(.+)$/
 			csa_file=$2
 			csa_zip=$2+".gz"
 			csa_path=$1
-		end	
+		end
 		puts csa_file
 		url = "http://www.ebi.ac.uk/thornton-srv/databases/CSA/archive/"+csa_zip
 		`wget #{url}`
 		`gunzip #{csa_file}`
-		`mv #{csa_file} #{csa_path}` 
+		`mv #{csa_file} #{csa_path}`
     end
   end
 
   def readPresults
-  	
+
 	fhPGenREsults = ''
 	if File.exists?(@pgen_results)
 		#get all the presult table in a single string
 		#then call parse_gen_table and put it all in PgenResults
         fhPGenResults = File.open(@pgen_results, 'r')
-	  
+
 	    i=0
 	  	fhPGenResults.each_line do |line|
 			@hPgenResults[i] = line
@@ -59,7 +59,7 @@ class GenAlignmentHandler
 		exit
 	end
 	#pp @hPgenResults
-	
+
   end
 
 
@@ -71,17 +71,17 @@ class GenAlignmentHandler
 			puts "No alignments found"
 			exit
 		end
-		
+
 		alignments = Array.new
 		alignments = data.split(/\n\n\n\n/)
 
-		
+
 		alignments.each_with_index do |alignment, index|
 			pdb_id = ''
 			if alignment =~ />>>\sAlignment\swith\s(.+):/
 				pdb_id = $1
 			end
-			
+
 			if @PgenAlignments.has_key?(pdb_id)
 
 				hash_length = @PgenAlignments[pdb_id].keys.length
@@ -90,41 +90,46 @@ class GenAlignmentHandler
 				@PgenAlignments[pdb_id][0] = alignment
 			end
 		end
-		
+
 		#pp @PgenAlignments
-		
+
 	end
 
 	def happen
 		#loop through the Results and get each pdb and use it to call write_gen_alignment
-		
+
 		hSeen = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+    continue = true
 		@hPgenResults.keys.sort.each do |line_count|
 			table_row = @hPgenResults[line_count]
 			entries = Array.new
 			entries = table_row.split(/\s+/)
 			puts line_count
-			
+
 			if entries.length == 10
-			
+
 				if hSeen.has_key?(entries[9])
 					hSeen[entries[9]]+=1
 				else
 					hSeen[entries[9]]= 0
 				end
-			
-				write_gen_alignment(entries[9],@PgenAlignments[entries[9]][hSeen[entries[9]]],line_count)
+
+				continue = write_gen_alignment(entries[9],@PgenAlignments[entries[9]][hSeen[entries[9]]],line_count)
 			elsif entries.length == 12
-			
+
 				if hSeen.has_key?(entries[11])
 					hSeen[entries[11]]+=1
 				else
 					hSeen[entries[11]]= 0
 				end
-			
-				write_gen_alignment(entries[11],@PgenAlignments[entries[11]][hSeen[entries[11]]],line_count)
+
+				continue = write_gen_alignment(entries[11],@PgenAlignments[entries[11]][hSeen[entries[11]]],line_count)
 			end
+    if !continue
+      exit
+    end
 		end
+
 	end
 
   #runs through the alignment data and outputs a fasta formatted multiple alignment file AND a small features table for jalview purposes
@@ -150,7 +155,7 @@ class GenAlignmentHandler
     csa_hash = get_csa(name,ligand_hash)
 
     #Does the consensus file exist? If not open it and write the header line, then close it.
-    
+
    # puts query_seq
     if ! File.exists?(path + id.to_s + ".contactcons")
 	  puts "Starting "+path + id.to_s + ".contactcons"
@@ -165,9 +170,9 @@ class GenAlignmentHandler
       fhCons.write "\n"
      fhCons.close
     end
-	
+
 	#exit
-	
+
     query_length = 0
     #count the number of characters in the sequence
     query_seq.each_char do | char |
@@ -186,9 +191,9 @@ class GenAlignmentHandler
 
     if(gen_hash.has_key? name)
       #open file to put the annotation in
-      puts "writing file : " + path +"/"+ id.to_s + "." + name + "_" + line_count.to_s + ".ann"
+      puts "writing file : " + path + id.to_s + "." + name + "_" + line_count.to_s + ".ann"
 
-      fhAnn = File.open(path + "/" + id.to_s + "." + name + "_" + line_count.to_s + ".ann", 'w')
+      fhAnn = File.open(path + id.to_s + "." + name + "_" + line_count.to_s + ".ann", 'w')
       fhAnn.write("HELIX\tb844b8\nSTRAND\te5b733\nPREDICTED_STRAND\te5dd55\nPREDICTED_HELIX\te353e3\nPREDICTED_CONTACT\t7f97f1\n")
 
 
@@ -383,9 +388,11 @@ class GenAlignmentHandler
       fhAln.close
 
       end
-
-
+      return true
+    else
+      return false
     end
+
   end
 
  def get_csa(name_csa, ligand_hash)
