@@ -144,7 +144,7 @@ class GenAlignmentHandler
     gen_hash = parse_gen_table(gen_table)
 
     #parse the alignments
-    print data
+    # print data
     (hit_id, hit_seq, query_id, query_seq, hit_annotation, query_annotation) = parse_gen_alignment(data)
     #puts query_seq
 	name_copy = String.new(name)
