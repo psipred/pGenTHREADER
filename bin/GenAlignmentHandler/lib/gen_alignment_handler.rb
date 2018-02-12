@@ -401,7 +401,7 @@ class GenAlignmentHandler
  def get_csa(name_csa, ligand_hash)
 
     #TODO shift this to the initialize
-	csa_file = String.new(@CSA)
+	  csa_file = String.new(@CSA)
   	pdb = String.new()
     chain_id = String.new()
     if name_csa =~ /^(.{4})(.)/
@@ -413,13 +413,15 @@ class GenAlignmentHandler
    #puts "command :"+command
    lines = `#{command}`
    #puts lines
-
+   if ! ligand_hash
+    ligand_hash=Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+   end
    results_lines = lines.split(/\n/)
    results_lines.each do |line|
    	 if line =~ /.{4},\d+,(.{3}),.{1},(\d+),/
    	 	ligand_hash[chain_id]["CAT_SITE"]["LIGAND_TYPE"] = "C"
-		ligand_hash[chain_id]["CAT_SITE"]["LIGAND_CONTACTS"][$2]["NAME"] = $1
-	 	ligand_hash[chain_id]["CAT_SITE"]["LIGAND_CONTACTS"][$2]["INTERACTIONS"][1] = 1
+		  ligand_hash[chain_id]["CAT_SITE"]["LIGAND_CONTACTS"][$2]["NAME"] = $1
+	 	  ligand_hash[chain_id]["CAT_SITE"]["LIGAND_CONTACTS"][$2]["INTERACTIONS"][1] = 1
 
      end
    end
