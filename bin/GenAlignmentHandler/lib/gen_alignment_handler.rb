@@ -147,7 +147,7 @@ class GenAlignmentHandler
     # print data
     (hit_id, hit_seq, query_id, query_seq, hit_annotation, query_annotation) = parse_gen_alignment(data)
     #puts query_seq
-	name_copy = String.new(name)
+	  name_copy = String.new(name)
     ligand_hash = get_ligand_data(name_copy)
     name_copy = String.new(name)
     gaps_hash = get_gaps(name_copy)
@@ -196,111 +196,114 @@ class GenAlignmentHandler
       fhAnn = File.open(path + id.to_s + "." + name + "_" + line_count.to_s + ".ann", 'w')
       fhAnn.write("HELIX\tb844b8\nSTRAND\te5b733\nPREDICTED_STRAND\te5dd55\nPREDICTED_HELIX\te353e3\nPREDICTED_CONTACT\t7f97f1\n")
 
-
       #print out the header rows for the ligand binding residues
-      ligand_hash.keys.each do | chain |
-        #find data for the same chain as we're talking about
-        blue_count = 0
-        red_count = 0
-        green_count = 0
-        cyan_count=0
-        #puts "Chain" + chain
-        #puts "chain_id" + chain_id
-        if(chain.capitalize == chain_id.capitalize)
-          #puts "I MADE I HERE!"
-          ligand_hash[chain].keys.each do |ligand_name|
-              #puts "AND NOW I'M IN HERE!!"
-              if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /M/
-                #fhAnn.write(ligand_name + "\t"+blue_count.to_s(16)+blue_count.to_s(16)+ blue_count.to_s(16)+blue_count.to_s(16))
-                fhAnn.write(ligand_name + "\t73ff73\n")
-                blue_count = blue_count+1
-              end
+      print(ligand_hash)
+      if ligand_hash
+         ligand_hash.keys.each do | chain |
+           #find data for the same chain as we're talking about
+           blue_count = 0
+           red_count = 0
+           green_count = 0
+           cyan_count=0
+           #puts "Chain" + chain
+           #puts "chain_id" + chain_id
+           if(chain.capitalize == chain_id.capitalize)
+             #puts "I MADE I HERE!"
+             ligand_hash[chain].keys.each do |ligand_name|
+                 #puts "AND NOW I'M IN HERE!!"
+                 if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /M/
+                   #fhAnn.write(ligand_name + "\t"+blue_count.to_s(16)+blue_count.to_s(16)+ blue_count.to_s(16)+blue_count.to_s(16))
+                   fhAnn.write(ligand_name + "\t73ff73\n")
+                   blue_count = blue_count+1
+                 end
 
-              if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /L/
-                #fhAnn.write(ligand_name + "\tff"+red_count.to_s(16)+red_count.to_s(16)+red_count.to_s(16)+red_count.to_s(16))
-                fhAnn.write(ligand_name + "\tff7373\n")
-                red_count = red_count+1
-              end
-              if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /P/
-                #fhAnn.write(ligand_name + "\t"+green_count.to_s(16)+green_count.to_s(16)+"ff"+green_count.to_s(16)+green_count.to_s(16))
-                fhAnn.write(ligand_name+"\t73ff73\n")
-                green_count = green_count+1
-              end
-              if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /A/
-                #fhAnn.write(ligand_name + "\t"+cyan_count.to_s(16)+cyan_count.to_s(16))
-                fhAnn.write(ligand_name + "\t73ffff\n")
-                cyan_count = cyan_count+1
-              end
-              if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /C/
-                fhAnn.write(ligand_name + "\tffb556\n")
+                 if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /L/
+                   #fhAnn.write(ligand_name + "\tff"+red_count.to_s(16)+red_count.to_s(16)+red_count.to_s(16)+red_count.to_s(16))
+                   fhAnn.write(ligand_name + "\tff7373\n")
+                   red_count = red_count+1
+                 end
+                 if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /P/
+                   #fhAnn.write(ligand_name + "\t"+green_count.to_s(16)+green_count.to_s(16)+"ff"+green_count.to_s(16)+green_count.to_s(16))
+                   fhAnn.write(ligand_name+"\t73ff73\n")
+                   green_count = green_count+1
+                 end
+                 if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /A/
+                   #fhAnn.write(ligand_name + "\t"+cyan_count.to_s(16)+cyan_count.to_s(16))
+                   fhAnn.write(ligand_name + "\t73ffff\n")
+                   cyan_count = cyan_count+1
+                 end
+                 if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /C/
+                   fhAnn.write(ligand_name + "\tffb556\n")
 
-              end
-          end
-        end
+                 end
+             end
+           end
+         end
       end
 
       fhAnn.write("\n")
       hConsensusData = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
       #print out the header rows for the ligand binding residues
+      if ligand_hash
+        ligand_hash.keys.each do | chain |
+          #find data for the same chain as we're talking about
+          if(chain.capitalize == chain_id.capitalize)
+            ligand_hash[chain].keys.each do |ligand_name|
+              fhAnn.write("STARTGROUP\thit ligands\n")
+                ligand_hash[chain][ligand_name]["LIGAND_CONTACTS"].keys.each do |res_num|
 
-      ligand_hash.keys.each do | chain |
-        #find data for the same chain as we're talking about
-        if(chain.capitalize == chain_id.capitalize)
-          ligand_hash[chain].keys.each do |ligand_name|
-            fhAnn.write("STARTGROUP\thit ligands\n")
-              ligand_hash[chain][ligand_name]["LIGAND_CONTACTS"].keys.each do |res_num|
+                  if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /C/
+                    res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
+                    query_coord = get_query_position(res_num, hit_seq, query_seq)
+                    if query_coord != 0
+                      hConsensusData["C"][ligand_name][hit_id]["CONF"] = gen_hash[name]
+                      hConsensusData["C"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                    end
+                    fhAnn.write ligand_name+"\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
+                  end
 
-                if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /C/
-                  res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
-                  query_coord = get_query_position(res_num, hit_seq, query_seq)
-                  if query_coord != 0
-                    hConsensusData["C"][ligand_name][hit_id]["CONF"] = gen_hash[name]
-                    hConsensusData["C"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                  if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /M/
+                    res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
+                    query_coord = get_query_position(res_num, hit_seq, query_seq)
+                    if query_coord != 0
+                      hConsensusData["M"][ligand_name][hit_id]["CONF"] = gen_hash[name]
+                      hConsensusData["M"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                    end
+                    fhAnn.write ligand_name+"\t" + hit_id + "\t0\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
                   end
-                  fhAnn.write ligand_name+"\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
-                end
 
-                if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /M/
-                  res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
-                  query_coord = get_query_position(res_num, hit_seq, query_seq)
-                  if query_coord != 0
-                    hConsensusData["M"][ligand_name][hit_id]["CONF"] = gen_hash[name]
-                    hConsensusData["M"][ligand_name][hit_id]["COORDS"][query_coord] = 1
-                  end
-                  fhAnn.write ligand_name+"\t" + hit_id + "\t0\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
-                end
+                  if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /L/
+                    res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
+                    query_coord = get_query_position(res_num, hit_seq, query_seq)
 
-                if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /L/
-                  res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
-                  query_coord = get_query_position(res_num, hit_seq, query_seq)
-
-                  if query_coord != 0
-                    #puts "query_coord : " + query_coord.to_s
-                    hConsensusData["L"][ligand_name][hit_id]["CONF"] = gen_hash[name]
-                    hConsensusData["L"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                    if query_coord != 0
+                      #puts "query_coord : " + query_coord.to_s
+                      hConsensusData["L"][ligand_name][hit_id]["CONF"] = gen_hash[name]
+                      hConsensusData["L"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                    end
+                    fhAnn.write "L\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
                   end
-                  fhAnn.write "L\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
-                end
-                if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /P/
-                  res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
-                  query_coord = get_query_position(res_num, hit_seq, query_seq)
-                  if query_coord != 0
-                    hConsensusData["P"][ligand_name][hit_id]["CONF"] = gen_hash[name]
-                    hConsensusData["P"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                  if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /P/
+                    res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
+                    query_coord = get_query_position(res_num, hit_seq, query_seq)
+                    if query_coord != 0
+                      hConsensusData["P"][ligand_name][hit_id]["CONF"] = gen_hash[name]
+                      hConsensusData["P"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                    end
+                    fhAnn.write "P\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
                   end
-                  fhAnn.write "P\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
-                end
-                if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /A/
-                  res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
-                  query_coord = get_query_position(res_num, hit_seq, query_seq)
-                  if query_coord != 0
-                    hConsensusData["A"][ligand_name][hit_id]["CONF"] = gen_hash[name]
-                    hConsensusData["A"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                  if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /A/
+                    res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
+                    query_coord = get_query_position(res_num, hit_seq, query_seq)
+                    if query_coord != 0
+                      hConsensusData["A"][ligand_name][hit_id]["CONF"] = gen_hash[name]
+                      hConsensusData["A"][ligand_name][hit_id]["COORDS"][query_coord] = 1
+                    end
+                    fhAnn.write "M\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
                   end
-                  fhAnn.write "M\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
                 end
-              end
-              fhAnn.write("ENDGROUP\thit ligands\n")
+                fhAnn.write("ENDGROUP\thit ligands\n")
+            end
           end
         end
       end
@@ -513,31 +516,42 @@ class GenAlignmentHandler
     uri = URI.parse("http://www.ebi.ac.uk/thornton-srv/databases/pdbsum/" + name_lig + "/" +name_lig+"_"+ chain_id.capitalize + ".csq")
 
     # Shortcut
-    response = Net::HTTP.get_response(uri)
-    lines = response.body.split(/\n/)
-    gaps = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+    begin
+      http = Net::HTTP.new(uri.host)
+      http.read_timeout = 0.5
+      http.open_timeout = 0.5
+      response = http.start() {|this_http|
+        this_http.get(uri.path)
+      }
 
-    seq_start = 1
-    gap_count = 0
-    gap_length = 0
-    lines.each do |line|
-      if line =~ /(\d+)\s+(\d+)/
-        start = $1.to_i
-        length = $2.to_i
+#      response = Net::HTTP.get_response(uri, :read_timeout => 2000)
+      lines = response.body.split(/\n/)
+      gaps = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
 
-        if(start > seq_start)
-          gap_length = start-seq_start
-          gap_count+=1
+      seq_start = 1
+      gap_count = 0
+      gap_length = 0
+      lines.each do |line|
+        if line =~ /(\d+)\s+(\d+)/
+          start = $1.to_i
+          length = $2.to_i
+
+          if(start > seq_start)
+            gap_length = start-seq_start
+            gap_count+=1
+          end
+
+          gaps[gap_count]["LENGTH"] = gap_length
+          gaps[gap_count]["START"] = seq_start
+          gaps[gap_count]["STOP"] = start-1
+          #puts "length " + gap_length.to_s
+          #puts "start " + seq_start.to_s
+          #puts "stop " +gaps[gap_count]["STOP"].to_s
+          seq_start=length+start
         end
-
-        gaps[gap_count]["LENGTH"] = gap_length
-        gaps[gap_count]["START"] = seq_start
-        gaps[gap_count]["STOP"] = start-1
-        #puts "length " + gap_length.to_s
-        #puts "start " + seq_start.to_s
-        #puts "stop " +gaps[gap_count]["STOP"].to_s
-        seq_start=length+start
       end
+    rescue
+      print("Failed to get gap data "+uri.to_s+"\n")
     end
 
     return gaps
@@ -554,76 +568,83 @@ class GenAlignmentHandler
     uri = URI.parse("http://www.ebi.ac.uk/thornton-srv/databases/pdbsum/" + name_lig + "/grow.out")
 
     # Shortcut
-    response = Net::HTTP.get_response(uri)
+    # print(uri.to_s+"\n")
+    begin
+      http = Net::HTTP.new(uri.host)
+      http.read_timeout = 0.5
+      http.open_timeout = 0.5
+      response = http.start() {|this_http|
+        this_http.get(uri.path)
+      }
 
-    lines = response.body.split(/\n/)
-    #annotation_data = Hash.new{ |h,k | h[k] = Hash.new{ |h2, k2| h2[k2] = hash.new(0)} }
-    annotation_data = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
+      lines = response.body.split(/\n/)
+      #annotation_data = Hash.new{ |h,k | h[k] = Hash.new{ |h2, k2| h2[k2] = hash.new(0)} }
+      annotation_data = Hash.new{|h,k| h[k]=Hash.new(&h.default_proc) }
 
-    amino_acids = {'ALA'=>1,'ARG'=>1, 'ASN'=>1, 'ASP' => 1, 'ASX' => 1,
-      'CYS' => 1, 'GLU' => 1, 'GLN' => 1, 'GLX' => 1, 'GLY' => 1,
-      'HIS' => 1, 'ILE' => 1, 'LEU' => 1, 'LYS' => 1, 'MET' => 1,
-      'PHE' => 1, 'PRO' => 1, 'SER' => 1, 'THR' => 1, 'TRY' => 1,
-      'TYR' => 1, 'VAL' => 1}
+      amino_acids = {'ALA'=>1,'ARG'=>1, 'ASN'=>1, 'ASP' => 1, 'ASX' => 1,
+        'CYS' => 1, 'GLU' => 1, 'GLN' => 1, 'GLX' => 1, 'GLY' => 1,
+        'HIS' => 1, 'ILE' => 1, 'LEU' => 1, 'LYS' => 1, 'MET' => 1,
+        'PHE' => 1, 'PRO' => 1, 'SER' => 1, 'THR' => 1, 'TRY' => 1,
+        'TYR' => 1, 'VAL' => 1}
 
-    interaction_count=1
+      interaction_count=1
 
-    lines.each do |line|
-      #would be better as a scanf
-      if line =~ /(.{2}).{2}(.{2})(.{1})(.{7})(.{3}).{8}.{12}.{7}(.{3})(.{7})(.{1})(.{6})(.+)/
-        bond = $1
-        ligand = $2
-        chain_id = $3
-        residue_number = $4
-        residue_name = $5
+      lines.each do |line|
+        #would be better as a scanf
+        if line =~ /(.{2}).{2}(.{2})(.{1})(.{7})(.{3}).{8}.{12}.{7}(.{3})(.{7})(.{1})(.{6})(.+)/
+          bond = $1
+          ligand = $2
+          chain_id = $3
+          residue_number = $4
+          residue_name = $5
 
-        ligand_name = $6
-        ligand_number = $7
-        ligand_chain = $8
+          ligand_name = $6
+          ligand_number = $7
+          ligand_chain = $8
 
-        distance = $9
+          distance = $9
 
-        bond = bond.gsub(/\s+/, "")
-        ligand = ligand.gsub(/\s+/, "")
-        chain_id = chain_id.gsub(/\s+/, "")
-        residue_number = residue_number.gsub(/\s+/, "")
-        residue_name = residue_name.gsub(/\s+/, "")
-        ligand_name = ligand_name.gsub(/\s+/, "")
-        ligand_number = ligand_number.gsub(/\s+/, "")
-        ligand_chain = ligand_chain.gsub(/\s+/, "")
-        distance = distance.gsub(/\s+/, "")
-        #puts chain_id+" "+distance
+          bond = bond.gsub(/\s+/, "")
+          ligand = ligand.gsub(/\s+/, "")
+          chain_id = chain_id.gsub(/\s+/, "")
+          residue_number = residue_number.gsub(/\s+/, "")
+          residue_name = residue_name.gsub(/\s+/, "")
+          ligand_name = ligand_name.gsub(/\s+/, "")
+          ligand_number = ligand_number.gsub(/\s+/, "")
+          ligand_chain = ligand_chain.gsub(/\s+/, "")
+          distance = distance.gsub(/\s+/, "")
+          #puts chain_id+" "+distance
 
-        if amino_acids.has_key?(ligand_name)
-          ligand = "P"
-        end
-
-        if ligand =~ /P/
-          ligand_name = "PEPTIDE_"+ligand_chain
-        end
-
-        annotation_data[chain_id][ligand_name]["LIGAND_TYPE"] = ligand
-        if annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"].has_key?(residue_number)
-          interaction_count = 1
-          annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"][residue_number]["INTERACTIONS"].keys.each do | count |
-            if count > interaction_count
-              interaction_count = count
-            end
+          if amino_acids.has_key?(ligand_name)
+            ligand = "P"
           end
-          interaction_count = interaction_count + 1
-        else
-          interaction_count = 1
+
+          if ligand =~ /P/
+            ligand_name = "PEPTIDE_"+ligand_chain
+          end
+
+          annotation_data[chain_id][ligand_name]["LIGAND_TYPE"] = ligand
+          if annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"].has_key?(residue_number)
+            interaction_count = 1
+            annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"][residue_number]["INTERACTIONS"].keys.each do | count |
+              if count > interaction_count
+                interaction_count = count
+              end
+            end
+            interaction_count = interaction_count + 1
+          else
+            interaction_count = 1
+          end
+
+          annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"][residue_number]["NAME"] = residue_name
+          annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"][residue_number]["INTERACTIONS"][interaction_count] = ligand_number
         end
-
-        annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"][residue_number]["NAME"] = residue_name
-        annotation_data[chain_id][ligand_name]["LIGAND_CONTACTS"][residue_number]["INTERACTIONS"][interaction_count] = ligand_number
-
-
       end
+    rescue
+      print("Failed to get ligand data "+uri.to_s+"\n")
     end
 
     return annotation_data
-
   end
 
   #Gets the list of MEDIUM or better pdb IDs
