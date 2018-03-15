@@ -146,7 +146,7 @@ const char     *rescodes = "ARNDCQEGHILKMFPSTWYV-X";
 const char     *sscodes = "CHE";
 
 /* Amino acid composition of SWISS-PROT 47.0 */
-float dbaaf[20] = 
+float dbaaf[20] =
 {
     0.078558, 0.053457, 0.041873, 0.053116, 0.015533, 0.039327, 0.066123, 0.069598, 0.022845, 0.059217,
     0.096416, 0.059123, 0.023859, 0.040095, 0.048484, 0.068456, 0.054442, 0.011580, 0.030628, 0.067271
@@ -560,7 +560,7 @@ void
     nb = newtem->length / 60 + 1;
 
     fprintf(hfp, "<hr><body text=\"#ffffff\" bgcolor=\"#000000\"><tt><pre><br><a name=\"%s\"></a>", brkid);
-    
+
     for (b = 0; b < nb; b++)
     {
 	fprintf(hfp, "         ");
@@ -813,7 +813,7 @@ void
 
 
 /*
- * Trace back highest scoring path 
+ * Trace back highest scoring path
  */
 void
                 trace(short *posa, short *posb, int mati, int matj,
@@ -851,8 +851,8 @@ void
 	      mati, matj, n);
 }
 
-int 
-                seqscore(const char *seq1, const char *seq2, ALNS * aln, const int alntype, 
+int
+                seqscore(const char *seq1, const char *seq2, ALNS * aln, const int alntype,
                          const int seq1len, const int seq2len)
 {
     short          *posa, *posb;
@@ -870,11 +870,11 @@ int
 	for (i = 1; i <= seq1len; i++)
 	    pat[i][seq2len] = 0;
 
-     
+
 
     for (j = seq2len; j > 0; j--)
     {
-        
+
 	if (trace_back)
 	    pat[seq1len][j] = 0;
 
@@ -927,7 +927,7 @@ int
 		if (ppsum > 0.0F)
 		    profprof /= ppsum;
 
-		//		fprintf(stderr,"profprof = %f\n", profprof); 
+		//		fprintf(stderr,"profprof = %f\n", profprof);
 		if (sumwt > 0)
 		    mat[now][i] = 0.154133F * profprof + 0.761082F * score / sumwt;
 		else
@@ -954,7 +954,7 @@ int
 
 		gap_open = GP_OPEN[envclass];
 		gap_extend = GP_EXT[envclass];
-		
+
 		if (toprow)
 		    row = maxrow - gap_open - (toprow - j) * gap_extend + gap_extend;
 		else
@@ -986,7 +986,7 @@ int
 		    }
 		}
 
-		//fprintf(stderr,"i=%d j=%d toprow=%d maxrow=%d mat=%d\n", i, j, toprow, maxrow, mat[now][i]); 
+		//fprintf(stderr,"i=%d j=%d toprow=%d maxrow=%d mat=%d\n", i, j, toprow, maxrow, mat[now][i]);
 
 		if (diag > maxrows[i])
 		{
@@ -1069,7 +1069,7 @@ int
     if (aln->length > MAXSEQLEN)
 	fail("score : max. align length exceeded!");
 
-   
+
     return (maxscore/100);
 
 
@@ -1081,7 +1081,7 @@ void
                 seqfit(float *epair, float *esolv, float *perco_a, float *perco_b, ALNS * tplt)
 {
     int             i, j, k;
-  
+
     /* Build structure gap penalty array */
     for (i = 0; i < nsst; i++)
 	if (!i)
@@ -1092,7 +1092,7 @@ void
 		maxgplen[j] = sstlist[i].start - j;
     for (j = sstlist[nsst - 1].start + sstlist[nsst - 1].length; j < seq1len; j++)
 	maxgplen[j] = BIG;
-    
+
     for (k = 0; k < seq1len; k++)
 	modsdx[k] = -1;
     for (k = 0; k < seq2len; k++)
@@ -1103,14 +1103,14 @@ void
 	    modsdx[tplt->posn_a[k] - 1] = tplt->posn_b[k] - 1;
 	    modsdx2[tplt->posn_b[k] - 1] = tplt->posn_a[k] - 1;
 	}
-    
+
     if (prtalnflg)
     {
 	if (htmlflg)
 	    htmlalign(tplt);
 	prtalign(tplt);
     }
-    
+
     e_final(epair, esolv, perco_a, perco_b);
 
     if (verbflg)
@@ -1235,7 +1235,7 @@ void
     short           at1, at2;
 
     seq1len = i = natoms = 0;
-    
+
     //    fprintf(stderr,"IN\n");
 
     if (!fgets(buf, 512, dfp))
@@ -1272,7 +1272,7 @@ void
 	{
 	  consv = atoi(cp);
 	  tpltsc1[i][j] = consv;
-          
+
 	}
 
 	if (buf[5] == '-')
@@ -1544,11 +1544,11 @@ int             getpsi(FILE * lfil)
 
 	for (k=0; k<20; k++)
 	    targf2[i][k] = targf[k] / sum;
-	    
+
 	for (k=0; k<20; k++)
 	    tpltsc2[i][k] *= 100;
     }
-    
+
     psidata = TRUE;
 
     return naa;
@@ -1562,7 +1562,7 @@ int             getmtx(FILE *lfil)
     char            buf[256];
 
     rewind(lfil);
-    
+
     if (fscanf(lfil, "%d", &naa) != 1)
 	fail("Bad mtx file - sequence length not found!");
 
@@ -1601,7 +1601,7 @@ int             getmtx(FILE *lfil)
     }
 
     psidata = TRUE;
-    
+
     return naa;
 }
 
@@ -1686,7 +1686,7 @@ int             getpsipredh(FILE * lfil)
 		    ssstruc[nsst++] = COIL;
 		    break;
 		}
-	
+
 	if (!fgets(buf, 256, lfil))
 	    fail("Bad PSIPRED format!");
 	p = buf+5;
@@ -1707,24 +1707,24 @@ int             getpsipredh(FILE * lfil)
 		break;
 	}
     }
-    
+
     if (nsst != nrel || naa != nsst)
     {
 	fprintf(stderr, "Incorrect PSIPRED prediction file format!\n");
 	return -1;
     }
-    
+
     ssstflg = TRUE;
-    
+
     if (verbflg)
 	puts("Parsed PSIPRED output.");
-    
+
     return naa;
 }
 
 /*
  * This routine will read in one sequence from a database file. The sequence
- * can be in any of the supported formats. Returns length of sequence. 
+ * can be in any of the supported formats. Returns length of sequence.
  */
 int
                 getseq(char *dbname, char *dseq, FILE * lfil)
@@ -2128,20 +2128,23 @@ int             main(int argc, char **argv)
     if (!ofp)
 	fail("Unable to open output file!");
 
-    
+
     pat = allocmat(MAXSEQLEN + 1, MAXSEQLEN + 1, sizeof(int), FALSE);
 
-    if (argc > 2)
-	ifp = fopen(argv[2], "r");
+    if (argc > 2){
+      printf("ARG 2: %s", argv[2]);
+	    ifp = fopen(argv[2], "r");
+    }
     else if ((ifp = fopen("psichain.lst", "r")) == NULL && getenv("THREAD_DIR"))
     {
-	strcpy(templname, getenv("THREAD_DIR"));
-	if (templname[strlen(templname) - 1] != '/')
-	    strcat(templname, "/");
-	strcat(templname, "psichain.lst");
-	ifp = fopen(templname, "r");
+	    strcpy(templname, getenv("THREAD_DIR"));
+      printf("PSICHAIN PATH 1: %s", templname);
+	    if (templname[strlen(templname) - 1] != '/')
+	      strcat(templname, "/");
+	    strcat(templname, "psichain.lst");
+	    ifp = fopen(templname, "r");
     }
-
+printf("PSICHAIN PATH 2: %s", templname);
     if (!ifp)
 	fail("Cannot open protein list (default: psichain.lst)!");
 
@@ -2209,12 +2212,12 @@ int             main(int argc, char **argv)
 	    frag[x]=seq2[i];
             i++; x++;
 	  }
- 
+
           s2len=(s2to-s2from);
 
 	  if (psidata)
 	  {
- 	    nwsc = seqscore(seq1, frag, NULL, 1, seq1len, s2len); 
+ 	    nwsc = seqscore(seq1, frag, NULL, 1, seq1len, s2len);
  	  }
           else
 	  {
@@ -2245,7 +2248,7 @@ int             main(int argc, char **argv)
 	    start1 = start2 = BIG;
 	    end1 = end2 = 0;
             int fst=1;
-            
+
 
 	    for (k = 1; k <= tplt.length; k++)
 	    {
@@ -2268,7 +2271,7 @@ int             main(int argc, char **argv)
 		}
 	    }
 
-           
+
 	    perid = 100.0F * nid / MIN(end1-start1, end2-start2);
 
 	    if (perid > 40.0F)
@@ -2285,11 +2288,11 @@ int             main(int argc, char **argv)
 	    hits[nn].nwsc = nwsc;
 
             last=start2;
-            
+
 	    if (verbflg)
-		printf("ALNLEN %s %4d %4d %4d %4d %4d\n", brkid, start1, end1, start2, end2, l); 
+		printf("ALNLEN %s %4d %4d %4d %4d %4d\n", brkid, start1, end1, start2, end2, l);
 	  }
-        
+
 
 	if ( nwsc >= NWCUTOFF && end2-start2 >=10)
 	{
@@ -2303,8 +2306,8 @@ int             main(int argc, char **argv)
           break;
         }
 
-        maketemplate(tfp, TRUE);    
-       
+        maketemplate(tfp, TRUE);
+
 
 	loc_sst();
 
@@ -2314,7 +2317,7 @@ int             main(int argc, char **argv)
 	{
 	    printf("\n\n>>> Alignment with %s:\n", brkid);
 	}
-	
+
 	seqfit(&hits[nn].epair, &hits[nn].esolv, &hits[nn].perco_a, &hits[nn].perco_b, &tplt);
 
 
@@ -2405,9 +2408,9 @@ int             main(int argc, char **argv)
 	{
 	    nn++;
         }
-       
+
        	freemat(pmat, seq2len);
-        freemat(distmat, seq1len);       	 
+        freemat(distmat, seq1len);
         //fprintf(stderr,"%s %d %d %f %d\n",brkid,start2,end2,nwsc,nn);
 
         if( start2 < 10 || nwsc < NWCUTOFF )
@@ -2415,58 +2418,58 @@ int             main(int argc, char **argv)
           naln=NALN;
           continue;
 	}
-        
-       
+
+
         }// while naln++;
-                
+
 
 	fclose(tfp);
-      
+
 	fflush(stdout);
 
-        continue;  
+        continue;
     }//while ifp
 
-   
+
     if (SHUFCOUNT)
 	return 0;
 
     pair_av = solv_av = pair_sd = solv_sd = ZERO;
-    
+
     for (i = 0; i < nn; i++)
     {
 	pair_av += hits[i].epair;
 	solv_av += hits[i].esolv;
     }
-    
+
     pair_av /= nn;
     solv_av /= nn;
-    
+
     for (i = 0; i < nn; i++)
     {
 	pair_sd += hits[i].epair - pair_av;
 	solv_sd += hits[i].esolv - solv_av;
     }
-    
+
     pair_sd = -SQR(pair_sd) / nn;
     solv_sd = -SQR(solv_sd) / nn;
-    
+
     for (i = 0; i < nn; i++)
     {
 	pair_sd += SQR(hits[i].epair - pair_av);
 	solv_sd += SQR(hits[i].esolv - solv_av);
     }
-    
+
     pair_sd = sqrt(pair_sd / (nn - 1));
     solv_sd = sqrt(solv_sd / (nn - 1));
-    
+
     for (tot_av = ZERO, i = 0; i < nn; i++)
 	tot_av += hits[i].epair + hits[i].esolv * pair_sd / solv_sd;
     tot_av /= nn;
-    
+
     for (tot_sd = ZERO, i = 0; i < nn; i++)
 	tot_sd += SQR(hits[i].epair + hits[i].esolv * pair_sd / solv_sd - tot_av);
-    
+
     tot_sd = sqrt(tot_sd / (nn - 1));
 
 
@@ -2489,11 +2492,11 @@ int             main(int argc, char **argv)
 		    hits[i].lena,
 		    hits[i].lenb,
 		    hits[i].brkid);
-	    
+
 	    fflush(ofp);
 	}
 
     freemat(pat, MAXSEQLEN+1);
-  
+
     return 0;
 }

@@ -150,7 +150,12 @@ class GenAlignmentHandler
 	  name_copy = String.new(name)
     ligand_hash = get_ligand_data(name_copy)
     name_copy = String.new(name)
-    gaps_hash = get_gaps(name_copy)
+    begin
+      gaps_hash = get_gaps(name_copy)
+    rescue
+      puts ("Could not get gaps")
+      return
+    end
     name_copy = String.new(name)
     csa_hash = get_csa(name,ligand_hash)
 
@@ -197,7 +202,7 @@ class GenAlignmentHandler
       fhAnn.write("HELIX\tb844b8\nSTRAND\te5b733\nPREDICTED_STRAND\te5dd55\nPREDICTED_HELIX\te353e3\nPREDICTED_CONTACT\t7f97f1\n")
 
       #print out the header rows for the ligand binding residues
-      print(ligand_hash)
+      # print(ligand_hash)
       if ligand_hash
          ligand_hash.keys.each do | chain |
            #find data for the same chain as we're talking about
