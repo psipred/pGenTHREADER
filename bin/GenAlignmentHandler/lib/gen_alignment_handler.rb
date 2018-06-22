@@ -85,12 +85,14 @@ class GenAlignmentHandler
 
 				hash_length = @PgenAlignments[pdb_id].keys.length
 				@PgenAlignments[pdb_id][hash_length] = alignment
+        @PgenAlignments[pdb_id][hash_length].sub! /\A.+?(?=>>>)/mi, ''
 			else
 				@PgenAlignments[pdb_id][0] = alignment
+        @PgenAlignments[pdb_id][0].sub! /\A.+?(?=>>>)/mi, ''
 			end
 		end
 
-		#pp @PgenAlignments
+		# pp @PgenAlignments["1m0kA0"][0]
 
 	end
 
@@ -135,8 +137,8 @@ class GenAlignmentHandler
   def write_gen_alignment (name,data,line_count)
 
     gen_table = @PgenTable
-	path = @path
-	id = @jobName
+	  path = @path
+	  id = @jobName
     #for result in object.request_results.find(:all, :conditions => "status_class = 9 OR status_class = 10")
     #  gen_table = result.data
     #end
@@ -494,10 +496,14 @@ class GenAlignmentHandler
     end
 
     gap_adjust = 0
-    gaps.keys.each do |counter|
-      if gaps[counter]["START"] < residue_number.to_i()
-          gap_adjust+=gaps[counter]["LENGTH"].to_i
+    begin
+      gaps.keys.each do |counter|
+        if gaps[counter]["START"] < residue_number.to_i()
+            gap_adjust+=gaps[counter]["LENGTH"].to_i
+        end
       end
+    rescue
+      print "no gaps"
     end
 
     #puts "coord: " +coord.to_s
