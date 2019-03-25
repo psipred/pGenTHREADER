@@ -126,9 +126,10 @@ class GenAlignmentHandler
 
 				continue = write_gen_alignment(entries[11],@PgenAlignments[entries[11]][hSeen[entries[11]]],line_count)
 			end
-    if !continue
-      exit
-    end
+      if !continue
+        exit
+      end
+      # exit
 		end
 
 	end
@@ -148,8 +149,13 @@ class GenAlignmentHandler
     #parse the alignments
     # print data
     (hit_id, hit_seq, query_id, query_seq, hit_annotation, query_annotation) = parse_gen_alignment(data)
-    #puts query_seq
-	  name_copy = String.new(name)
+    # puts query_seq
+    # puts hit_seq
+    query_offset =  query_seq[/\A-*/].size
+    hit_offset = hit_seq[/\A-*/].size
+    # puts query_offset
+    # puts hit_offset
+    name_copy = String.new(name)
     ligand_hash = get_ligand_data(name_copy)
     name_copy = String.new(name)
     begin
@@ -201,7 +207,7 @@ class GenAlignmentHandler
       puts "writing file : " + path + id.to_s + "." + name + "_" + line_count.to_s + ".ann"
 
       fhAnn = File.open(path + id.to_s + "." + name + "_" + line_count.to_s + ".ann", 'w')
-      fhAnn.write("HELIX\tb844b8\nSTRAND\te5b733\nPREDICTED_STRAND\te5dd55\nPREDICTED_HELIX\te353e3\nPREDICTED_CONTACT\t7f97f1\n")
+      fhAnn.write("HELIX\te353e3\nSTRAND\te5dd55\nPREDICTED_STRAND\td7ffab\nPREDICTED_HELIX\t96adc8\nPREDICTED_CONTACT\t7f97f1\n")
 
       #print out the header rows for the ligand binding residues
       # print(ligand_hash)
@@ -266,7 +272,7 @@ class GenAlignmentHandler
                       hConsensusData["C"][ligand_name][hit_id]["CONF"] = gen_hash[name]
                       hConsensusData["C"][ligand_name][hit_id]["COORDS"][query_coord] = 1
                     end
-                    fhAnn.write ligand_name+"\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
+                    fhAnn.write ligand_name+"\t" + hit_id + "\t-1\t" + (res_num+hit_offset).to_s + "\t" + (res_num+hit_offset).to_s + "\t"+ligand_name+"\n"
                   end
 
                   if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /M/
@@ -276,7 +282,7 @@ class GenAlignmentHandler
                       hConsensusData["M"][ligand_name][hit_id]["CONF"] = gen_hash[name]
                       hConsensusData["M"][ligand_name][hit_id]["COORDS"][query_coord] = 1
                     end
-                    fhAnn.write ligand_name+"\t" + hit_id + "\t0\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
+                    fhAnn.write ligand_name+"\t" + hit_id + "\t0\t" + (res_num+hit_offset).to_s + "\t" + (res_num+hit_offset).to_s + "\t"+ligand_name+"\n"
                   end
 
                   if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /L/
@@ -288,7 +294,7 @@ class GenAlignmentHandler
                       hConsensusData["L"][ligand_name][hit_id]["CONF"] = gen_hash[name]
                       hConsensusData["L"][ligand_name][hit_id]["COORDS"][query_coord] = 1
                     end
-                    fhAnn.write "L\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
+                    fhAnn.write "L\t" + hit_id + "\t-1\t" + (res_num+hit_offset).to_s + "\t" + (res_num.+hit_offset).to_s + "\t"+ligand_name+"\n"
                   end
                   if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /P/
                     res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
@@ -297,7 +303,7 @@ class GenAlignmentHandler
                       hConsensusData["P"][ligand_name][hit_id]["CONF"] = gen_hash[name]
                       hConsensusData["P"][ligand_name][hit_id]["COORDS"][query_coord] = 1
                     end
-                    fhAnn.write "P\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
+                    fhAnn.write "P\t" + hit_id + "\t-1\t" + (res_num+hit_offset).to_s + "\t" + (res_num+hit_offset).to_s + "\t"+ligand_name+"\n"
                   end
                   if ligand_hash[chain][ligand_name]["LIGAND_TYPE"] =~ /A/
                     res_num = correct_coordinates(res_num,hit_seq,gaps_hash)
@@ -306,7 +312,7 @@ class GenAlignmentHandler
                       hConsensusData["A"][ligand_name][hit_id]["CONF"] = gen_hash[name]
                       hConsensusData["A"][ligand_name][hit_id]["COORDS"][query_coord] = 1
                     end
-                    fhAnn.write "M\t" + hit_id + "\t-1\t" + res_num.to_s + "\t" + res_num.to_s + "\t"+ligand_name+"\n"
+                    fhAnn.write "M\t" + hit_id + "\t-1\t" + (res_num+hit_offset).to_s + "\t" + (res_num+hit_offset).to_s + "\t"+ligand_name+"\n"
                   end
                 end
                 fhAnn.write("ENDGROUP\thit ligands\n")
@@ -356,9 +362,9 @@ class GenAlignmentHandler
         element_hash.keys.each do | ss_type |
           coords_hash = element_hash[ss_type]
           if(ss_type =~ /HELIX/)
-            fhAnn.write "H\t" + hit_id + "\t-1\t" + coords_hash["START"].to_s + "\t" + coords_hash["STOP"].to_s + "\tHELIX\n"
+            fhAnn.write "H\t" + hit_id + "\t-1\t" + (coords_hash["START"]+hit_offset).to_s + "\t" + (coords_hash["STOP"]+hit_offset).to_s + "\tHELIX\n"
           elsif(ss_type =~ /STRAND/)
-            fhAnn.write "S\t" + hit_id + "\t-1\t" + coords_hash["START"].to_s + "\t" + coords_hash["STOP"].to_s + "\tSTRAND\n"
+            fhAnn.write "S\t" + hit_id + "\t-1\t" + (coords_hash["START"]+hit_offset).to_s + "\t" + (coords_hash["STOP"]+hit_offset).to_s + "\tSTRAND\n"
           end
         end
       end
@@ -370,9 +376,9 @@ class GenAlignmentHandler
         element_hash.keys.each do | ss_type |
           coords_hash = element_hash[ss_type]
           if(ss_type =~ /HELIX/)
-            fhAnn.write "H\t" + query_id + "\t-1\t" + coords_hash["START"].to_s + "\t" + coords_hash["STOP"].to_s + "\tPREDICTED_HELIX\n"
+            fhAnn.write "H\t" + query_id + "\t-1\t" + (coords_hash["START"]+query_offset).to_s + "\t" + (coords_hash["STOP"]+query_offset).to_s + "\tPREDICTED_HELIX\n"
           elsif(ss_type =~ /STRAND/)
-            fhAnn.write "S\t" + query_id + "\t-1\t" + coords_hash["START"].to_s + "\t" + coords_hash["STOP"].to_s + "\tPREDICTED_STRAND\n"
+            fhAnn.write "S\t" + query_id + "\t-1\t" + (coords_hash["START"]+query_offset).to_s + "\t" + (coords_hash["STOP"]+query_offset).to_s + "\tPREDICTED_STRAND\n"
           end
         end
       end
