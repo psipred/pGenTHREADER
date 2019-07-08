@@ -114,8 +114,11 @@ class GenAlignmentHandler
 				else
 					hSeen[entries[9]]= 0
 				end
-
-				continue = write_gen_alignment(entries[9],@PgenAlignments[entries[9]][hSeen[entries[9]]],line_count)
+        begin
+				   continue = write_gen_alignment(entries[9],@PgenAlignments[entries[9]][hSeen[entries[9]]],line_count)
+        rescue
+           continue = true
+        end
 			elsif entries.length == 12
 
 				if hSeen.has_key?(entries[11])
@@ -123,8 +126,11 @@ class GenAlignmentHandler
 				else
 					hSeen[entries[11]]= 0
 				end
-
-				continue = write_gen_alignment(entries[11],@PgenAlignments[entries[11]][hSeen[entries[11]]],line_count)
+        begin
+				    continue = write_gen_alignment(entries[11],@PgenAlignments[entries[11]][hSeen[entries[11]]],line_count)
+        rescue
+            continue = true
+        end
 			end
       if !continue
         exit
