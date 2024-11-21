@@ -32,10 +32,38 @@
 # Changes in 8.3.1
 # - Ligand contact prediction removed
 #
+# Changes in 8.3.2
+# - Ansible installer added
+#
 ###############################################################################
 
-Follow the steps:
 
+INSTALLATION VIA GITHUB AND ANSIBLE:
+
+First ensure that ansible and PSIPRED are installed on your system, then clone
+the github repo. PSIPRED is available at https://github.com/psipred/psipred.
+Use the ansible installer provided for PSIPRED.
+
+For pGenTHREADER
+
+% pip install ansible
+% git clone https://github.com/psipred/pGenTHREADER.git
+% cd pGenTHREADER/ansible_installer
+
+Next edit the the config_vars.yml to reflect where you would like pGenTHREADER and 
+its underlying data to be installed. The app_locations varialbe MUST be the same
+as you used for the PSIPRED install. You can choose a version of uniref but
+we recommend uniref90 for most accurate results.
+
+You can now run ansible as per
+
+% ansible-playbook -i hosts install.yml
+
+You can edit the hosts file to install memsatsvm on one or more machines.
+
+Manual installation can be completed with the steps below
+
+Follow the steps:
 
 #-----------------------------------------------------------------------------#
 #

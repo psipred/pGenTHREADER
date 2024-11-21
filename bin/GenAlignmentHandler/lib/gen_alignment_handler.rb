@@ -33,16 +33,16 @@ class GenAlignmentHandler
 			csa_path=$1
 		end
 		puts csa_file
-		url = "http://www.ebi.ac.uk/thornton-srv/databases/CSA/archive/"+csa_zip
+		url = "https://www.ebi.ac.uk/thornton-srv/m-csa/media/flat_files/"+csa_file
 		`wget #{url}`
-		`gunzip #{csa_file}`
+		# `gunzip #{csa_file}`
 		`mv #{csa_file} #{csa_path}`
     end
   end
 
   def readPresults
 
-	fhPGenREsults = ''
+	fhPGenResults = ''
 	if File.exists?(@pgen_results)
 		#get all the presult table in a single string
 		#then call parse_gen_table and put it all in PgenResults

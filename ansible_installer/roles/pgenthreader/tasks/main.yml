@@ -130,14 +130,14 @@
     ansible.builtin.lineinfile:
       path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
       regexp: "^TDB="
-      line: "TDB={{ app_location }}/genthreader/tdb"
+      line: "TDB={{ app_location }}/pgenthreader/tdb"
 
   - name: update cath tdb bin location
     # when: pgenthreader_exist.stat.exists == False
     ansible.builtin.lineinfile:
       path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
       regexp: "^CATH_TDB="
-      line: "CATH_TDB={{ app_location }}/genthreader/cath_domain_tdb"
+      line: "CATH_TDB={{ app_location }}/pgenthreader/cath_domain_tdb"
 
 #### pGenThreader.sh edits
 
@@ -181,7 +181,7 @@
     ansible.builtin.lineinfile:
       path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
       regexp: "^TDB="
-      line: "TDB={{ app_location }}/genthreader/tdb"
+      line: "TDB={{ app_location }}/pgenthreader/tdb"
 
 #### pDomThreader.sh edits
 
@@ -218,4 +218,4 @@
     ansible.builtin.lineinfile:
       path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
       regexp: "^TDB="
-      line: "TDB={{ app_location }}/genthreader/cath_domain_tdb"
+      line: "TDB={{ app_location }}/pgenthreader/cath_domain_tdb"
