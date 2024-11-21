@@ -1,0 +1,221 @@
+---
+
+  - name: Check if pgenthreader is installed
+    stat: path={{ app_location }}/pgenthreader/GenThreader.sh
+    register: pgenthreader_exist
+
+  - name : Check Out pGenTHREADER from git
+    when: pgenthreader_exist.stat.exists == False
+    git:
+      repo: https://github.com/psipred/pGenTHREADER.git
+      dest: "{{ app_location }}/pgenthreader"
+      clone: yes
+      force: yes
+
+  - name: Download foldlib
+    when: pgenthreader_exist.stat.exists == False
+    get_url:
+      url: http://bioinfadmin.cs.ucl.ac.uk/downloads/pGenTHREADER/foldlibs/foldlib.tar.gz
+      dest: "{{ app_location }}/pgenthreader/"
+      timeout: 120
+    register: get_url_result
+
+  - name: Download domainlib
+    when: pgenthreader_exist.stat.exists == False
+    get_url:
+      url: http://bioinfadmin.cs.ucl.ac.uk/downloads/pGenTHREADER/foldlibs/cath_domain_tdb_4_2.tar.gz
+      dest: "{{ app_location }}/pgenthreader/"
+      timeout: 120
+    register: get_url_result
+
+  - name: make foldlib dir
+    when: pgenthreader_exist.stat.exists == False
+    shell: "mkdir {{ app_location }}/pgenthreader/tdb/"
+
+  - name: untar foldlib
+    when: pgenthreader_exist.stat.exists == False
+    unarchive:
+      src: "{{ app_location }}/pgenthreader/foldlib.tar.gz"
+      dest: "{{ app_location }}/pgenthreader/tdb/"
+      remote_src: yes
+
+  - name: untar domainlib
+    when: pgenthreader_exist.stat.exists == False
+    unarchive:
+      src: "{{ app_location }}/pgenthreader/cath_domain_tdb_4_2.tar.gz"
+      dest: "{{ app_location }}/pgenthreader/"
+      remote_src: yes
+
+  - name: Copy psichain list
+    when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ app_location }}/pgenthreader/tdb/psichain.lst"
+      dest: "{{ app_location }}/pgenthreader/data/psichain.lst"
+
+  - name: Copy cath_dom list
+    when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.copy:
+      remote_src: true
+      src: "{{ app_location }}/pgenthreader/cath_domain_tdb/cath_dom.lst"
+      dest: "{{ app_location }}/pgenthreader/cath_domain_tdb/cath_dom.lst"
+
+  - name: make the binaries
+    when: pgenthreader_exist.stat.exists == False
+    shell: "cd {{ app_location }}/pgenthreader/src; make"
+
+  - name: install the binaries
+    when: pgenthreader_exist.stat.exists == False
+    shell: "cd {{ app_location }}/pgenthreader/src; make install"
+
+  - name: Download CSA
+    when: pgenthreader_exist.stat.exists == False
+    get_url:
+      url: https://www.ebi.ac.uk/thornton-srv/m-csa/media/flat_files/literature_pdb_residues.csv
+      dest: "{{ app_location }}/pgenthreader/data"
+      timeout: 120
+    register: get_url_result
+
+  - name: remove foldlib tar.gz
+    when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.file:
+      state: absent
+      path: "{{ app_location }}/pgenthreader/foldlib.tar.gz"
+
+  - name: remove cath dom tar.gz
+    when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.file:
+      state: absent
+      path: "{{ app_location }}/pgenthreader/cath_domain_tdb_4_2.tar.gz"
+
+##### GenThreader.sh edits
+
+  - name: update blast location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^PSIB="
+      line: "PSIB=/usr/local/bin/"
+
+  - name: update uniref location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^DB="
+      line: "DB={{ data_location }}/uniref/{{ uniref_db }}.fasta"
+
+  - name: update PSIPRED data location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^PDATA="
+      line: "PDATA={{ app_location }}/psipred/data/"
+
+  - name: update genthreader bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^PGT="
+      line: "PGT={{ app_location }}/pgenthreader/bin"
+
+  - name: update psipred bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^PSIP="
+      line: "PSIP={{ app_location }}/psipred/bin"
+
+  - name: update tdb bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^TDB="
+      line: "TDB={{ app_location }}/genthreader/tdb"
+
+  - name: update cath tdb bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/GenThreader.sh"
+      regexp: "^CATH_TDB="
+      line: "CATH_TDB={{ app_location }}/genthreader/cath_domain_tdb"
+
+#### pGenThreader.sh edits
+
+  - name: update blast location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
+      regexp: "^PSIB="
+      line: "PSIB={{ app_location }}/blast-2.2.26/bin"
+
+  - name: update uniref location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
+      regexp: "^DB="
+      line: "DB={{ data_location }}/uniref/{{ uniref_db }}.fasta"
+
+  - name: update PSIPRED data location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
+      regexp: "^PDATA="
+      line: "PDATA={{ app_location }}/psipred/data/"
+
+  - name: update genthreader bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
+      regexp: "^PGT="
+      line: "PGT={{ app_location }}/pgenthreader/bin"
+
+  - name: update psipred bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
+      regexp: "^PSIP="
+      line: "PSIP={{ app_location }}/psipred/bin"
+
+  - name: update tdb bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pGenThreader.sh"
+      regexp: "^TDB="
+      line: "TDB={{ app_location }}/genthreader/tdb"
+
+#### pDomThreader.sh edits
+
+  - name: update blast location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
+      regexp: "^PSIB="
+      line: "PSIB=/usr/local/bin/"
+
+  - name: update uniref location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
+      regexp: "^DB="
+      line: "DB={{ data_location }}/uniref/{{ uniref_db }}.fasta"
+
+  - name: update PSIPRED data location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
+      regexp: "^PDATA="
+      line: "PDATA={{ app_location }}/psipred/data/"
+
+  - name: update psipred bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
+      regexp: "^PSIP="
+      line: "PSIP={{ app_location }}/psipred/bin"
+
+  - name: update tdb bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
+      regexp: "^TDB="
+      line: "TDB={{ app_location }}/genthreader/cath_domain_tdb"

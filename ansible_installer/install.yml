@@ -1,0 +1,7 @@
+- name: Install pGenTHREADER
+  hosts: all
+  roles:
+    - blast
+    - pgenthreader
+  vars_files:
+   - ./config_vars.yml

@@ -1,0 +1,6 @@
+---
+
+app_location: /home/dbuchan/test_ansible/Applications
+data_location: /home/dbuchan/test_ansible/Data
+# uniref_db: uniref90
+uniref_db: uniref50
