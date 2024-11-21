@@ -119,9 +119,9 @@ fold libraries will be added in a future release.
 #
 #------------------------------------------------------------------------------
 
-9. prompt> sh pGenThreader.sh -j pgen_test -i test/test.fsa
+9. prompt> sh pGenThreader.sh pgen_test test/test.fsa
 
-10.prompt> sh pDomThreader.sh -j pdom_test -i test/test.fsa
+10.prompt> sh pDomThreader.sh pdom_test test/test.fsa
 
 11.prompt> sh GenThreader.sh -j test -i test/test.fsa
 
