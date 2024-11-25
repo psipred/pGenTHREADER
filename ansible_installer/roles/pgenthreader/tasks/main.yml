@@ -88,6 +88,35 @@
       state: absent
       path: "{{ app_location }}/pgenthreader/cath_domain_tdb_4_2.tar.gz"
 
+  - name: Check if pfilt is installed
+    stat: path={{ app_location }}/pfilt/pfilt
+    register: pfilt_exist
+
+  - name: Download pfilt
+    when: pfilt_exist.stat.exists == False
+    get_url:
+      url: http://bioinfadmin.cs.ucl.ac.uk/downloads/pfilt/pfilt1.5.tar.gz
+      dest: "{{ app_location }}"
+      timeout: 120
+    register: get_url_result
+
+  - name: untar pfilt
+    when: pfilt_exist.stat.exists == False
+    unarchive:
+      src: "{{ app_location }}/pfilt1.5.tar.gz"
+      dest: "{{ app_location }}/"
+      remote_src: yes
+
+  - name: make the binaries
+    when: pfilt_exist.stat.exists == False
+    shell: "cd {{ app_location }}/pfilt/; make"
+
+  - name: remove pfilt tar.gz
+    when: pfilt_exist.stat.exists == False
+    ansible.builtin.file:
+      state: absent
+      path: "{{ app_location }}/pfilt1.5.tar.gz"
+
 ##### GenThreader.sh edits
 
   - name: update blast location
@@ -190,7 +219,7 @@
     ansible.builtin.lineinfile:
       path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
       regexp: "^PSIB="
-      line: "PSIB=/usr/local/bin/"
+      line: "PSIB={{ app_location }}/blast-2.2.26/bin"
 
   - name: update uniref location
     # when: pgenthreader_exist.stat.exists == False
@@ -219,3 +248,12 @@
       path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
       regexp: "^TDB="
       line: "TDB={{ app_location }}/pgenthreader/cath_domain_tdb"
+
+  - name: update  bin location
+    # when: pgenthreader_exist.stat.exists == False
+    ansible.builtin.lineinfile:
+      path:  "{{ app_location }}/pgenthreader/pDomThreader.sh"
+      regexp: "^.PSIP\/pfilt"
+      line: "{{ app_location }}/pfilt/pfilt -f $FSA > $JOB.fsa"
+
+
