@@ -51,7 +51,7 @@ For pGenTHREADER
 % cd pGenTHREADER/ansible_installer
 
 Next edit the the config_vars.yml to reflect where you would like pGenTHREADER and 
-its underlying data to be installed. The app_locations varialbe MUST be the same
+its underlying data to be installed. The app_locations variable MUST be the same
 as you used for the PSIPRED install. You can choose a version of uniref but
 we recommend uniref90 for most accurate results.
 
@@ -59,7 +59,7 @@ You can now run ansible as per
 
 % ansible-playbook -i hosts install.yml
 
-You can edit the hosts file to install memsatsvm on one or more machines.
+You can edit the hosts file to install pGenTHREADER on one or more machines.
 
 Manual installation can be completed with the steps below
 
